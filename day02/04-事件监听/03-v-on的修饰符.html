@@ -7,22 +7,22 @@
 </head>
 <body>
   <div id="app">
-    <!-- 1. .stop修饰符的使用 和我们之前使用的event.stopPropagation -->
+    <!-- 1. .stop修饰符的使用 和我们之前使用的event.stopPropagation 阻止冒泡-->
     <div @click="divClick">
       外部按钮
       <button @click.stop="btnClick">内部按钮</button>
     </div>
 
-    <!-- 2. .prevent修饰符的使用 -->
+    <!-- 2. .prevent修饰符的使用 阻止事件的默认行为 如果我们不想调用表单自带的submit点击方法 可以使用它来执行我们自己定义的点击方法-->
     <form action="baidu">
       <input type="submit" value="提交" @click.prevent="submitClick">
     </form>
 
-    <!-- 3. .监听某一个键位 -->
+    <!-- 3. .监听某一个键位 按下enter键时调用keyUp方法 -->
     <br>
     <input type="text" @keyup.enter="keyUp">
 
-    <!-- 4. .once修饰符的使用 -->
+    <!-- 4. .once修饰符的使用 无论点击多少次 只会触发一次回调-->
     <button @click.once="onceClick">按钮</button>
   </div>
   <script src="../js/vue.js"></script>

@@ -12,6 +12,7 @@
     <!-- <button v-on:click="counter++">+</button> -->
     <!-- 使用v-on来进行事件监听 -->
     <button v-on:click="increment">+</button>
+    <!-- v-bind:disabled 后面的表达式为判断条件 满足条件 当前按钮不可点击 -->
     <button v-on:click="decrement" v-bind:disabled="this.counter <= 0">-</button>
 
     <!-- 语法糖写法 -->

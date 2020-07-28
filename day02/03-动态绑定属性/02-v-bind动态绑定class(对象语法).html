@@ -15,13 +15,16 @@
 </head>
 <body>
   <div id="app">
+    <!-- 单个类的写法 -->
+    <!-- <h2 v-bind:class="{key1: value1}">{{message}}</h2> -->
+    <h2 v-bind:class="{active: isActive}">{{message}}</h2>
     <!-- 类名的单引号可加可不加 -->
     <!-- <h2 v-bind:class="{key1: value1, key2: value2}">{{message}}</h2> -->
     <!-- 多个类的写法 -->
     <h2 v-bind:class="{active: isActive, line: isLine}">{{message}}</h2>
     <!-- 如果有多个类名，它们之间是不冲突的 -->
     <h2 class="title" v-bind:class="{active: isActive, line: isLine}">{{message}}</h2>
-    <!-- 如果过于复杂，可以放在一个methods或者computed中 -->
+    <!-- 如果过于复杂，可以放在一个methods中 这里的getClasses需要加括号 相当于执行这个方法-->
     <h2 v-bind:class="getClasses()">{{message}}</h2>
 
     <button @click="btnClick">按钮</button>
