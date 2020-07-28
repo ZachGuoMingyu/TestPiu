@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .goods-table .expensive{
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <!-- 价格大于70的图书使用红色背景显示显示 -->
+  <div id="app">
+    <table class="goods-table" border="1" cellspacing=0>
+      <tr>
+        <th>编号</th>
+        <th>名称</th>
+        <th>价格</th>
+      </tr>
+      <tr :class="item.price > 70 ? 'expensive' : ''" v-for="(item,index) in goods_list" :key="index">
+        <td>{{index}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.price}}</td>
+      </tr>
+    </table>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    var goods = new Vue({
+      el: "#app",
+      data: {
+        goods_list: [
+          { "name": "python入门", "price": 50 },
+          { "name": "python进阶", "price": 100 },
+          { "name": "python高级", "price": 75 },
+          { "name": "python研究", "price": 55 },
+          { "name": "python教育", "price": 110 },
+        ]
+      },
+      methods: {
+      },
+    });
+
+  </script>
+</body>
+</html>

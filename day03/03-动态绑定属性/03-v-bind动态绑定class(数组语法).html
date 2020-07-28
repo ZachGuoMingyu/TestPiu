@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 数组语法传入多个值 -->
+    <h2 :class="[active, line]">{{message}}</h2>
+    <!-- 和普通的类同时存在并不冲突 -->
+    <h2 class="title" :class="[active, line]">{{message}}</h2>
+    <!-- 如果过于复杂，可以放在一个methods或者computed中 -->
+    <h2 :class="getClasses()">{{message}}</h2>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊',
+        active: 'aaaa',
+        line: 'bbbb'
+      },
+      methods: {
+        getClasses(){
+          return [this.active, this.line]
+        }
+      },
+  })
+  </script>
+</body>
+</html>

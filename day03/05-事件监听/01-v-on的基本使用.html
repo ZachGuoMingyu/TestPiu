@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2>当前计数：{{counter}}</h2>
+    <!-- 简便写法 -->
+    <!-- <button v-on:click="counter++">+</button> -->
+    <!-- 使用v-on来进行事件监听 -->
+    <button v-on:click="increment">+</button>
+    <button v-on:click="decrement" v-bind:disabled="this.counter <= 0">-</button>
+
+    <!-- 语法糖写法 -->
+    <button @click="increment">+</button>
+    <button @click="decrement" v-bind:disabled="this.counter <= 0">-</button>
+
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        counter: 0,
+      },
+      methods: {
+        increment(){
+          this.counter++
+        },
+        decrement(){
+          this.counter--
+        }
+      },
+  })
+  </script>
+</body>
+</html>

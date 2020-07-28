@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 1. .stop修饰符的使用 和我们之前使用的event.stopPropagation -->
+    <div @click="divClick">
+      外部按钮
+      <button @click.stop="btnClick">内部按钮</button>
+    </div>
+
+    <!-- 2. .prevent修饰符的使用 -->
+    <form action="baidu">
+      <input type="submit" value="提交" @click.prevent="submitClick">
+    </form>
+
+    <!-- 3. .监听某一个键位 -->
+    <br>
+    <input type="text" @keyup.enter="keyUp">
+
+    <!-- 4. .once修饰符的使用 -->
+    <button @click.once="onceClick">按钮</button>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {},
+      methods: {
+        divClick(){
+          console.log('divClick---外部按钮');
+        },
+        btnClick(){
+          console.log('btnClick---内部按钮');
+        },
+        submitClick(){
+          console.log('submitClick');
+        },
+        keyUp(){
+          console.log('keyUp');
+        },
+        onceClick(){
+          console.log('onceClick');
+        }
+      },
+  })
+  </script>
+</body>
+</html>

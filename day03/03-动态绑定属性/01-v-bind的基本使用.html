@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 错误的做法：这里不可以直接使用imgURL和插值语法 -->
+    <!-- <img src="imgURL" alt=""> -->
+    <!-- <img src="{{imgURL}}" alt=""> -->
+
+    <!-- 正确的做法：使用v-bind指令 -->
+    <img v-bind:src="imgURL" alt="">
+    <a v-bind:href="aHref">百度一下</a>
+
+    <!-- 语法糖的写法 -->
+    <img :src="imgURL" alt="">
+    <a :href="aHref">百度一下</a>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好，Vue！',
+        imgURL: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1591152975603&di=cd34d862c4a043f7b739ec412c3745fa&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F076c839571bbf704605a73b4782991a9eab6fcee137bb-x7ZwYw_fw658',
+        aHref: 'https://www.baidu.com'
+      },
+  })
+  </script>
+</body>
+</html>
