@@ -12,8 +12,8 @@
     <h2 v-else-if="score>=80">良好</h2>
     <h2 v-else-if="score>=60">及格</h2>
     <h2 v-else>不及格</h2>
-
-    <h1>评价:{{result}}</h1>
+    <!-- 方法的返回结果也可以放在插值语法中 但是记得加括号 相当于方法执行的结果 -->
+    <h1>评价:{{getResult()}}</h1>
   </div>
   <script src="../js/vue.js"></script>
   <script>
@@ -22,8 +22,8 @@
       data: {
         score: 99
       },
-      computed: {
-        result(){
+      methods: {
+        getResult(){
           let message = ''
           if (this.score >= 90) {
             message = '优秀'
