@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 需求：输入框中输入姓名，失去焦点时验证是否存在 如果已经存在 提示重新输入 如果不存在 提示可以使用 -->
+  <!-- 
+    1.通过v-model实现数据绑定
+    2.需要提供提示信息
+    3.需要侦听器监听输入信息的变化
+    4.需要修改触发的事件 失去焦点时触发
+   -->
+  <div id="app">
+    <div>
+      <span>用户名：</span>
+      <span>
+        <!-- 1.双向数据绑定username -->
+        <!-- (一开始不加)lazy修饰符可以让数据在失去焦点或者回车时才会更新 -->
+        <input type="text" v-model.lazy="username">
+      </span>
+      <!-- 2.展示提示信息 -->
+      <span>{{tip}}</span>
+    </div>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    /*
+      第三步如何实现呢
+      1.采用侦听器监听用户名的变化
+      2.调用后台接口进行验证
+      3.根据验证的结果调整提示信息
+    */ 
+    const app = new Vue({
+      el: '#app',
+      data: {
+        //用户名  
+        username: '',
+        // 提示信息
+        tip: ''
+      },
+      methods: {
+        // 给一个形参接收传递进来的username
+        checkName(username){
+          
+          // 调用接口，可以使用定时器的方式模拟接口调用
+          setTimeout(() => {
+            // 模拟接口的调用
+            if (username == 'admin') {
+              this.tip = '用户名已经存在，请更换一个'
+            }else{
+              this.tip = '用户名可以使用'
+            }
+          }, 2000);
+          // 大家注意 当我们使用延时函数 使用的不是箭头函数的时候 而是使用之前的setTimeout(function(),2000) 这个时候我们如果在其内部使用this 需要在外部定义一下 let that = this (将this存为一个变量，此时的this指向checkName) 在延时函数内部使用that(利用闭包访问that，that是一个指向obj的指针) 这是因为setTimeout中函数内的this是指向了window对象，这是由于setTimeout()调用的代码运行在与所在函数完全分离的执行环境上。这会导致这些代码中包含的 this 关键字会指向 window (或全局)对象。但是我们使用箭头函数就不会有这个问题 因为ES6中的箭头函数完全修复了this的指向，this总是指向词法作用域，也就是外层调用者obj，因此利用箭头函数就可以轻松解决这个问题。
+        }
+      },
+      watch: {
+        // 形参就是我们输入的用户名
+        username(val){
+          // 当用户名发生变化的时候 改方法会触发 然后调用后台接口验证用户名的合法性
+          // 我们在methods中封装一个方法 来专门处理这个操作
+          // 调用checkName方法
+          this.checkName(val)
+          // 修改提示信息
+          this.tip = '正在验证...'
+          // 回到上面 给v-model使用.lazy修饰符 修改触发的事件 失去焦点时触发
+
+
+          // 最后总结一下 侦听器就是监听数据的变化 当数据发生变化的时候 触发侦听器所绑定的函数 在函数中处理一些异步的任务 并且可以随时修改状态的变化
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

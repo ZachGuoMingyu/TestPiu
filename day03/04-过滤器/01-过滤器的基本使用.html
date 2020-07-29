@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 需求 输入一个值 将其首字母变为大写 -->
+  <div id="app">
+    <input type="text" v-model="message">
+    <!-- 使用过滤器第一种方式 只使用一个过滤器 | 过滤器名称 -->
+    <div>{{message | upper}}</div>
+
+    <!-- 使用过滤器的第二种方式 多个过滤器级联使用 -->
+    <div>{{message | upper | lower}}</div>
+
+    <!-- 绑定属性的时候也可以使用过滤器 打开控制器查看 会发现abc绑定的数据首字母也大写了-->
+    <div :abc="message | upper">测试数据</div>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    // 定义全局过滤器 在所有地方都可以使用 不仅限于app实例中
+    // 定义过滤器 第一个参数 过滤器名称 第二个参数 处理函数 函数的形参是我们要处理的数据
+    // 将首字母变为大写
+    Vue.filter('upper', function (val) {
+      // 过滤器需要返回一个结果
+      // charAt(0)拿到第一个字符 toUpperCase()将其变为大写 +val.slice(1) 是拼接第二个字符以后所有的字符 slice(1)截取字符串 从第二个一直到最后
+      return val.charAt(0).toUpperCase() + val.slice(1)
+    })
+    // 将首字母变为小写
+    Vue.filter('lower', function (val) {
+      return val.charAt(0).toLowerCase() + val.slice(1)
+    })
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: ''
+      },
+      // 过滤器还可以定义在这里 
+      // 局部过滤器 仅限app实例中使用
+      filters:{
+        upper(val) {
+          return val.charAt(0).toUpperCase() + val.slice(1)
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>
