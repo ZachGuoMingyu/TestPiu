@@ -83,10 +83,18 @@ const app = new Vue({
       // }
       // return totalPrice
 
-      // reduce
+      // reduce第一版 book是books中的每一个对象 不要忘记起始值为0
+      // return this.books.reduce(function (totalValue, book) {
+      //   return totalValue + book.price * book.count
+      // },0)
+
+      // reduce 箭头函数
       return this.books.reduce((totalValue, book) => {
         return totalValue + book.price * book.count
       },0)
+
+      // 箭头函数简化版
+      // return this.books.reduce((totalValue, book) =>totalValue + book.price * book.count, 0)
     }
   },
   // 过滤器
