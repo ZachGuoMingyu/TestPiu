@@ -27,11 +27,13 @@
           //getFullYear()获取年份 因为val.getMonth()显示的是0到11 所以我们加一 显示1到12
           // 如果我们自己处理 需要写好多的判断来接收传递进来的格式进行拼接显示 那么我们可以使用一个现成的js文件
           if (arg == 'yyyy-MM-dd') {
-            var ret = '';
-            ret = val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate();
-            return ret;
+            let date = ''
+            date = val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate()
+            return date
+          }else{
+            return '当前格式不符合'
           }
-          return value;
+          
         }
       }
   })
