@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <cpn></cpn>
+  </div>
+  <!-- 1.通过script标签进行模板分离写法 注意：类型是type="text/x-template" 但是这种我们不常用-->
+  <!-- <script type="text/x-template" id="cpn">
+    <div>
+      <h2>我是组件的标题</h2>
+      <p>我是组件的内容</p>
+    </div>
+  </script> -->
+
+  <!-- 2.template标签 常用的-->
+  <template id="cpn">
+    <!-- 组件模板 也需要有一个根div -->
+    <div>
+      <h2>我是组件的标题</h2>
+      <p>我是组件的内容</p>
+    </div>
+  </template>
+  <script src="../js/vue.js"></script>
+  <script>
+    // 1.注册全局组件
+    Vue.component('cpn',{
+      template:'#cpn'
+    })
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊'
+      },
+    })
+  </script>
+</body>
+</html>

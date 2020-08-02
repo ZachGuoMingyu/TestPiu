@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active{
+      color: red;
+    }
+    .line{
+      text-decoration: line-through;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- 数组方法传入一个值 -->
+    <h2 :class="[active]">{{message}}</h2>
+    <!-- 数组语法传入多个值 -->
+    <h2 :class="[active, line]">{{message}}</h2>
+    <!-- 和普通的类同时存在并不冲突 -->
+    <h2 class="title" :class="[active, line]">{{message}}</h2>
+    <!-- 如果过于复杂，可以放在一个methods中 这里的getClasses需要加括号 相当于执行这个方法-->
+    <h2 :class="getClasses()">{{message}}</h2>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊',
+        active: 'active',
+        line: 'line'
+      },
+      methods: {
+        getClasses(){
+          return [this.active, this.line]
+        }
+      },
+  })
+  </script>
+</body>
+</html>

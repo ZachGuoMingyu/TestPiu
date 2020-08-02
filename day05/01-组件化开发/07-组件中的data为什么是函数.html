@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 3.使用组件 -->
+    <!-- 我们在下面新建三个组件属性，那我们思考一个问题 三个组件 共用一个data 那么 它们之间的counter会不会相互影响呢 运行发现 并没有  -->
+    <!-- 其实 当我们创建一个新的组件的时候 并不是用的同一个data属性 因为现在data是一个函数 我们每新建一个组件 会调用一下data函数 这个时候 data函数将返回值返回给我们  也就是每调用一次 就会返回一个新的对象 返回的对象是不同的 在下面举个例子-->
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+  </div>
+
+  <!-- 2.组件模板 -->
+  <template id="cpn">
+    <div>
+      <h2>当前计数:{{counter}}</h2>
+      <button @click="sub">-</button>
+      <button @click="add">+</button>
+    </div>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+    // 1.注册全局组件
+    Vue.component('cpn',{
+      template: '#cpn',
+      // 组件中的data属性
+      data() {
+        return {
+          counter: 0
+        }
+      },
+      // 组件中也有methods方法
+      methods: {
+        add(){
+          this.counter++
+        },
+        sub(){
+          this.counter--
+        }
+      },
+    })
+    const app = new Vue({
+      el: '#app',
+      data: {
+
+      },
+  })
+  </script>
+  <script>
+    function abc() {
+      return {
+        name: 'zhangsan',
+        age: 18
+      }
+    }
+
+    let obj1 = abc()
+    let obj2 = abc()
+    let obj3 = abc()
+
+    // 我们在下面修改obj1的name 我们发现 obj2的name和obj3的name并没有发生变化
+    // 因为每一次调用abc函数返回的对象的内存地址都不一样 所以obj1 obj2 obj3 它们三个是不同的对象 所以 一个修改其中的属性 不会影响到另外两个 这也就是为什么组件中的data是函数
+    obj1.name = 'lisi'
+    console.log(obj1, obj2, obj3);
+  </script>
+</body>
+</html>

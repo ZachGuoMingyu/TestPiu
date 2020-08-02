@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- 引入样式 -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+
+</head>
+
+<body>
+  <div id="app">
+    <el-time-picker v-model="value1" :picker-options="{
+          selectableRange: '18:30:00 - 20:30:00'
+        }" placeholder="任意时间点">
+    </el-time-picker>
+    <el-time-picker arrow-control v-model="value2" :picker-options="{
+          selectableRange: '18:30:00 - 20:30:00'
+        }" placeholder="任意时间点">
+    </el-time-picker>
+  </div>
+  <script src="./js/vue.js"></script>
+  <!-- 引入组件库 -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        value1: new Date(2016, 9, 10, 18, 40),
+        value2: new Date(2016, 9, 10, 18, 40)
+      },
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 当我们使用cInfo的时候 发现数据没有渲染出来 而且控制台还会有警告 告诉我们使用c-info来代替cInfo 因为目前Vue的版本动态绑定语法后不支持使用驼峰语法 但是不保证后面Vue更新会不会改变这个-->
+    <cpn :c-info="info" :child-message="message"></cpn>
+  </div>
+  <!-- 通过template创建模板 -->
+  <template id="cpn">
+    <div>
+      <h2>{{cInfo}}</h2>
+      <h2>{{childMessage}}</h2>
+    </div>
+  </template>
+  <script src="../js/vue.js"></script>
+  <script>
+    // 1.创建组件
+    const cpn = {
+      template: '#cpn',
+      props: {
+        cInfo: {
+          type: Object,
+          default(){
+            return {}
+          }
+        },
+        childMessage: {
+          type: String,
+          default: ''
+        }
+      }
+    }
+    const app = new Vue({
+      el: '#app',
+      data: {
+        info: {
+          name: 'zach',
+          age: 18,
+          height: 1.88
+        },
+        message: '我是父组件的message'
+      },
+      // 注册组件
+      components: {
+        cpn
+      }
+  })
+  </script>
+</body>
+</html>

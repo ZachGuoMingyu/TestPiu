@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <parent-cpn></parent-cpn>
+    <!-- 子组件是不可以在外界直接使用的 如果想要使用 得去root组件中再注册一次 -->
+    <!-- <child-cpn></child-cpn> -->
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    // 1.创建第一个组件构造器（子组件）
+    const childComponent = Vue.extend({
+      template: `
+        <div>我是子组件内容，我是child</div>
+      `
+    })
+
+    //2.创建第二个组件构造器（父组件）
+    const parentComponent = Vue.extend({
+      // 子组件的使用直接插入在父组件的模板中使用即可
+      template: `
+        <div>
+          我是父组件内容，我是parent
+          <h2>我是父组件的一个标题</h2>
+          <child-cpn></child-cpn>
+        </div>
+      `,
+      // 组件构造器内也可以使用组件属性 也可以注册组件 此时注册组件便是当前组件的子组件
+      // childComponent在parentComponent中注册 parentComponent在vue实例中注册 当前两个组件都已经被注册了
+      components: {
+        // 在这里注册的组件 它的作用域就是parentComponent 所以在外界不能单独使用 只能在parentComponent中使用
+        'child-cpn': childComponent
+      }
+    })
+    // root组件
+    const app = new Vue({
+      el: '#app',
+      data: {},
+      components: {
+        'parent-cpn': parentComponent
+      }
+  })
+  </script>
+</body>
+</html>

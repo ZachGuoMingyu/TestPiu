@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 插槽默认内容 -->
+    <my-cpn></my-cpn>
+
+    <!-- 放入新的元素去替换插槽 -->
+    <my-cpn>
+      <h2>我是替换插槽的内容</h2>
+      <p>我也是替换插槽的内容</p>
+    </my-cpn>
+  </div>
+  <template id="myCpn">
+    <div>
+      <!-- 1.slot的基本使用 -->
+      <slot>我是一个插槽中的默认内容</slot>
+    </div>
+  </template>
+  <script src="../js/vue.js"></script>
+  <script>
+    Vue.component('my-cpn',{
+      template: '#myCpn'
+    })
+    const app = new Vue({
+      el: '#app',
+      data: {},
+  })
+  </script>
+</body>
+</html>

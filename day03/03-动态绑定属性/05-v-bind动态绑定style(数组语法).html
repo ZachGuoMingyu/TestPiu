@@ -6,18 +6,18 @@
   <title>Document</title>
 </head>
 <body>
-  <!-- 点击列表的哪一项，那么该项的文字变成红色 -->
   <div id="app">
-    <ul>
-      <li v-for="(m, index) in movies">{{index}}-{{m}}</li>
-    </ul>
+    <!-- 在data中定义 使用数组语法直接获取 -->
+    <h2 :style="[baseStyle, baseStyle2]">{{message}}</h2>
   </div>
-  <script src="./js/vue.js"></script>
+  <script src="../js/vue.js"></script>
   <script>
     const app = new Vue({
       el: '#app',
       data: {
-        movies: ['复仇者联盟','海王','火影忍者','超人']
+        message: '你好啊',
+        baseStyle: {backgroundColor:'red'},
+        baseStyle2: {fontSize: '100px'}
       },
   })
   </script>

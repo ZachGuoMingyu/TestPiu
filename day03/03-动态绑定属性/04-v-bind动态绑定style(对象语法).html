@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 对象语法结构 -->
+    <!-- <h2 :style="{key(属性名):value(属性值)}">{{message}}</h2> -->
+    <!-- 将字体大小设置一个font-size:50px -->
+    <!-- 如果你使用了像素单位 那么记住必须加单引号，否则是当做一个变量解析 -->
+    <h2 :style="{fontSize: '50px'}">{{message}}</h2>
+    <!-- 也可以在data里面去定义finalSize，当成一个变量来使用 -->
+    <h2 :style="{fontSize: finalSize + 'px', backgroundColor: finalColor}">{{message}}
+    <!-- 可以通过方法去获取 这里的getStyle需要加括号 相当于执行这个方法-->
+    <h2 :style="getStyle()">{{message}}
+    </h2>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        message: '你好啊',
+        finalSize: 100,
+        finalColor: 'red'
+      },
+      methods: {
+        getStyle(){
+          return { fontSize: this.finalSize + 'px', backgroundColor: this.finalColor }
+        }
+      },
+  })
+  </script>
+</body>
+</html>

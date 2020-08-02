@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 1.在遍历的过程中，我们不使用索引值（下标） -->
+    <ul>
+      <li v-for="item in names">{{item}}</li>
+      <!-- 如果是一个对象数组我们通过v-for遍历拿到的item是相应的对象 这个时候，我们可以根据对象里的参数取到响应的值 例如 item.name -->
+      <li v-for="item in names2">{{item.name}}</li>
+    </ul>
+
+    <!-- 2.在遍历过程中，获取索引值 -->
+    <ul>
+      <li v-for="(item, index) in names">
+        {{index+1}}.{{item}}-----
+        <button @click="btnClick(index)">删除</button>
+      </li>
+    </ul>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        names: ['kobe','james','curry','wade'],
+        names2: [
+          {
+            name: 'zhangsan',
+            id: 110
+          },
+          {
+            name: 'lisi',
+            id: 111
+          }
+        ]
+      },
+      methods: {
+        btnClick(index){
+          console.log(index);
+          //splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
+          this.names.splice(index, 1)
+        }
+      },
+  })
+  </script>
+</body>
+</html>

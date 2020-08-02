@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 在这里先创建几个html来说明一下使用组件化的便利之处 使用多次的时候不需要拷贝多次 使用组件就可以 -->
+    <!-- <div>
+      <h2>我是组件的标题</h2>
+      <p>我是组件中的一个段落内容</p>
+    </div> -->
+
+    <!-- 3.使用组件 -->
+    <my-cpn></my-cpn>
+
+    <!-- 组件的好处 1.方便我们进行管理 2.可移植性比较高 -->
+  </div>
+  
+  <script src="../js/vue.js"></script>
+  <script>
+    // 1.创建组件构造器对象
+    const cpn = Vue.extend({
+      // 模板 它的作用就是把我们要定义的组件内容 放在其中
+      template: `
+        <div>
+          <h2>我是组件的标题</h2>
+          <p>我是组件中的一个段落内容</p>  
+        </div>
+      `
+    })
+
+    // 2.注册组件
+    // 两个参数   第一个参数：自定义组件名称    第二个参数：传进构造器对象
+    Vue.component('my-cpn', cpn)
+    const app = new Vue({
+      el: '#app',
+      data: {
+
+      },
+  })
+  </script>
+</body>
+</html>
