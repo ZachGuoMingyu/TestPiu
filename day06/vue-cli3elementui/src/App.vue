@@ -27,10 +27,11 @@
       <el-table-column prop="comment" label="描述" align="center"></el-table-column>
 
       <el-table-column label="操作" width="150" align="center">
-        <div>
-          <el-button type="success" size="mini">删除</el-button>
+        <template slot-scope="scope">
+          <el-button @click="deleteClick(scope.row.id)" type="success" size="mini">删除</el-button>
           <el-button type="danger" size="mini">操作</el-button>
-        </div>
+        </template>
+        
       </el-table-column>
 
     </el-table>
@@ -67,6 +68,10 @@ export default {
     // 选中的方法
     handleSelectionChange(val) {
       this.multipleSelection = val;
+    },
+    // 单个删除
+    deleteClick(id){
+      console.log(id);
     },
     // 一键删除
     onePassClickDelete() {
