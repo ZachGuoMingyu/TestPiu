@@ -1,0 +1,18 @@
+{
+  "presets": [
+    ["env", {
+      "modules": false,
+      "targets": {
+        // 浏览器 babel的作用就是把es6转成es5 那么需要对哪些浏览器进行适配呢 
+        // 市场份额大于百分之1的浏览器
+        // 并且是最后的两个版本
+        // ie小于等于8 不做考虑
+        "browsers": ["> 1%", "last 2 versions", "not ie <= 8"]
+      }
+    }],
+    // 阶段 es是有很多阶段的 有 0 1 2 3 好多阶段 目前只针对stage-2这个阶段做处理 可以自己了解一下
+    "stage-2"
+  ],
+  // 转换的过程中依赖这两个插件
+  "plugins": ["transform-vue-jsx", "transform-runtime"]
+}

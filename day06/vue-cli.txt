@@ -1,0 +1,19 @@
+
+	导入element-ui
+		我们使用npm i element-ui -S来安装 安装过后 我们还需要一些配置(快速上手 完成引入)  还需全局配置一下
+		(下面还有按需导入 那么这个按需导入就是我们想要使用什么插件 就导入什么插件 但是按需导入 比较麻烦 所以我们一般情况下都是全部导入)
+
+		(但是我们发现 还有一个  使用 vue-cli@3  点击下面的Element 插件 进入到github 到install那里)
+		有一个命令 vue add element 那么这个命令 实际上可以把我们之前说的那些操作给完成 那我们来到当前目录下执行
+			 Still proceed? -y 当前存储库中有未提交的更改，建议先提交或存储它们。
+			 How do you want to import Element? -Fully import 另一个是按需导入 全部导入的包会稍微大一点
+			 Do you wish to overwrite Element's SCSS variables? -y  您希望重写元素的SCSS变量吗
+			 Choose the locale you want to load? zh-CN 选择您想要加载的语言环境?
+
+			 安装完以后 先看看多了哪些东西 去app.vue中 看是否多了el-button 然后运行 看下效果
+
+			 再去element官网-》快速上手-》全局配置  按照以上设置，项目中所有拥有 size 属性的组件的默认尺寸均为 'small'，弹框的初始 z-index 为 3000。
+
+			 在element.js中 Vue.use(Element, { size: 'small', zIndex: 3000 }) 加上size。。。
+
+
