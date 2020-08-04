@@ -2,6 +2,7 @@
   <div id="app">
     <!-- 批量删除 -->
     <el-button type="danger" @click="onePassClickDelete">危险按钮</el-button>
+
     <!-- 使用的是 多选 表格 -->
     <!-- :data 绑定我们的数组 -->
     <!-- @selection-change="handleSelectionChange" 获取选中的内容 -->
@@ -13,12 +14,13 @@
       @selection-change="handleSelectionChange">
       <!-- width 宽度 align 居中 -->
       <el-table-column type="selection" width="180" align="center"></el-table-column>
+      
       <!-- prop要和我们数据中的字段相对应 -->
       <el-table-column label="栏目名称" width="180" prop="name" align="center"></el-table-column>
 
       <el-table-column prop="parent.name" label="父级栏目" width="120" align="center">
         <!-- 这里我们使用作用域插槽来做判断 -->
-        <template scope="scope" align="center">
+        <template slot-scope="scope" align="center">
           <p v-if="scope.row.parent == null">---</p>
           <p v-else>{{scope.row.parent.name}}</p>
         </template>
