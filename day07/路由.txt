@@ -1,0 +1,44 @@
+先新建一个learnvuerouter项目 运行起来 在浏览器中实现如何界面不刷新实现路由跳转 看下控制台网络下面 如果没有运行的 证明页面没有刷新
+
+然后在控制台里输入location.hash = 'foo' 我们看见url后面发生改变 但是页面没有刷新 当我们使用hash的时候 其实当前界面中有一个路由的映射 每一次我们给hash设置一个值 其实就是去这个路由映射中找到对应的界面 进行渲染 这个操作不需要我们做 vuerouter会被我们处理的 这个时候我们只需要使用vuerouter 配置路由关系 就可以通过hash方案 改变url并且我们的界面不发生刷新 这是一种解决方案 直接修改hash就可以 
+
+在html5中 提供了另一种修改方案 history模式 可以通过history对象去修改url 通过它来修改 页面也是不会刷新的
+
+	我们使用history.pushState来进行修改
+
+	history.pushState({},'','home')
+	pushState可以传很多参数 对象参数我们不传 title参数我们也不传 最主要的是后面的url参数
+	我们发现url的链接发生改变 多了/home 而且整个网站也没有刷新
+
+	我们还可以继续pushState -> history.pushState({},'','about') url从home变到了about
+	那么我们看下这个 push 这个push我们在哪里用的比较多呢 在栈结构里用的比较多 这里的push就类似于栈结构的压栈操作或是入栈操作（百度搜个栈结构图片来讲解一下）栈结构只有一个出口 所以有一个特性 入栈出栈是先进后出 先入栈的在最下面 后入栈的在上面 所以后入的先出 先入的后出 我们这里的pushState就是一个类似入栈操作
+	那么我们现在是home在最底部 about在home上面
+
+	那我们再执行一次history.pushState({},'','me') 那么现在的结构就是 home->about->me
+	再来一次history.pushState({},'','demo') 那么现在的结构就是 home->about->me->demo 那么现在demo就是在栈顶 所以url显示的永远是栈顶的
+
+	那么我们下面使用一条新的命令 history.back() 一旦我们调用back 就会把当前栈顶的给移除掉 也就是回退到我们上一个url
+	那我们可以使用浏览器的前进后退按钮看一下 后退按钮就相当于我们的back 前进按钮会根据浏览器的缓存 进行一个push操作
+	其实 push 和 back 就类似于入栈和出栈操作
+
+
+	除了我们的pushState方法 我们还有replaceState方法 那他们两个有什么区别呢
+	我们使用一下 history.replaceState({},'','home') url也是可以改变的 
+	我们再执行一遍 history.replaceState({},'','about')
+	我们点击返回按钮 发现并不能返回到home 这里的replace是一个替换 并不是想push入栈操作 而是让about替换了home 就没有返回了
+
+
+
+	还有一个方法 是 go 先使用history.pushState({},'','home') 添加几个
+	我们使用history.go() 可以跳转到指定的界面 
+	如果执行history.go(-1) 那么就相当于back()
+	如果只选history.go(1) 那么就相当于前进一个
+	也可以执行go(-2) 那么就是回退两个
+	go(2) 就是前进两个
+
+
+	以后我们配置vuerouter的时候 就有两种模式可以选择 hash和history 默认是hash模式 后面我们具体说
+
+
+	执行npm install vue-router --save安装vuerouter依赖
+	然后在项目中src下新建文件夹router 新建 index.js 在里面配置路由信息
