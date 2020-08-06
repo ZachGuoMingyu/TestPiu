@@ -1,0 +1,9 @@
+Vuex概述
+	这里画个图演示一下  给一个对象当做是Vuex 来管理一个多个组件要共享的变量 再来几个组件 分别描述一下如果没有vuex会是什么情况 有了vuex是什么情况 重点是 vuex中的变量是响应式的
+
+
+	Vuex状态管理图例解释
+		被绿色虚线圈住的地方是Vuex管理的地方 外面有一个Vue Componments就是我们的组件 但是大家注意 所有的箭头都是按照顺时针方向走的 那我们看state这里 当state里的一些属性发生改变的时候 会重新渲染我们的组件 把最新的状态显示在组件里  但是注意 我们不能在组件中 直接去修改state的状态 官方不推荐我们这么做 那我们在组件中 如何修改state中的值呢？ 我们顺着箭头指向往下开 会有一个dispatch(分发，发布的意思) 会让我们先发布一个行为到Actions 然后再commit(提交到mutations中) 然后通过mutations 再来修改state中的状态
+		（devtools是一个浏览器插件，这个插件会帮助我们记录每一次state修改的记录） 但是 当我们直接在组件中修改state的状态的时候 就会绕过devtools这个阶段 所以就不会监测到state修改的记录 所以官方推荐我们还是按照这个顺序去执行 
+
+		但是 我们可以跳过actions这个阶段直接通过mutations修改state内变量的状态 官方允许我们这么做？那么actions存在还有什么意义吗？ 有的 如果我们后面有异步操作 是放在Actions中来操作的 mutations中 我们来处理同步操作 也就是actions中处理完异步操作 然后提交给mutations 然后mutations来接着处理 因为mutations中处理异步操作的话 devtools也会失效 所以actions上面会有一个箭头指向backend api(后端接口) 也就是用来处理网络操作
