@@ -1,8 +1,8 @@
 <template>
   <div class="hello">
-    <h2>{{$store.state.count * $store.state.count}}</h2>
-    <h2>{{more20Student}}</h2>
-    <h2>{{$store.getters.more20Student}}</h2>
+    <h2>平方：{{$store.state.count * $store.state.count}}</h2>
+    <h2>年龄大于20岁的学生有：{{more20Student}}</h2>
+    <h2>年龄大于20岁的学生有：{{$store.getters.more20Student}}</h2>
   </div>
 </template>
 

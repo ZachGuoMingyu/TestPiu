@@ -27,10 +27,8 @@ export default {
       // 通过this.$store.state.属性的方式来访问状态
       return this.$store.state.count
     },
-    
   },
   methods: {
-    
     increment(){
       // 通过this.$store.commit('mutation中方法')来修改状态
       // 通过mutation更新，commit里面的参数就是 事件类型
@@ -43,7 +41,7 @@ export default {
     // 实现addCount()方法 1.先去mutation去定义一个方法 2.回来实现addCount
     // motation传递参数
     addCount(count){
-      // 第一个参数 是我们的事件类型 第二个参数 我们称之为payload 载荷 是传给mutation-》incrementCount的参数
+      // 第一个参数 是我们的事件类型 第二个参数 我们称之为payload 载荷 是传给mutation->addCount的参数
       this.$store.commit('addCount', count)
     },
     // 假如我们有多个参数需要通过commit传递到mutation中呢？(回到上面 添加按钮 点击按钮添加一个学生)

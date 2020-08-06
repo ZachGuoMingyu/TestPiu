@@ -29,13 +29,13 @@ const store = new Vuex.Store({
       state.count += count
     },
     // 添加一个学生 普通的提交风格
-    addStudent(state, stu){
-      state.students.push(stu)
-    },
-    // 特殊的提交风格 说道特殊提交风的时候用payload接收参数 使用payload.stu
-    // addStudent(state, payload) {
-    //   state.students.push(payload.stu)
+    // addStudent(state, stu){
+    //   state.students.push(stu)
     // },
+    // 特殊的提交风格 说道特殊提交风的时候用payload接收参数 使用payload.stu
+    addStudent(state, payload) {
+      state.students.push(payload.stu)
+    },
     
   },
   // getters类似我们的计算属性computed 比如说我们想获取一些经过计算的数据就可以在这里实现

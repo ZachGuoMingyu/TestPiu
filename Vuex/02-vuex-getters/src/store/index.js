@@ -24,7 +24,7 @@ const store = new Vuex.Store({
     }
   },
   // getters类似我们的计算属性computed 比如说我们想获取一些经过计算的数据就可以在这里实现
-  // 比如说 我们想要获取state中count的平方
+  // 比如说 我们想要获取state中count的平方 先去App.vue中看下用以前的方式怎么处理 再来这里用getters
   getters:{
     // 平方
     squareCount(state){
@@ -38,11 +38,12 @@ const store = new Vuex.Store({
     // 我们现在想要获取到大于20岁学生的个数 我们可以直接使用getters.more20Student.length
     // 如果我们的getters方法里有两个参数 无论叫什么名字 第一个都是state 第二个都是getters
     more20StudentCount(state, getters){
+      // return state.students.filter(s => s.age > 20).length
       return getters.more20Student.length
     },
     // getters 传递参数
     // 获取年龄大于age的学生 这个时候我们这个age就不能写死 这个age是别人用getters的时候动态传递进来的 但是我们getters默认是不能传递参数的 这个时候怎么做呢？
-    // moreAgeStudent(state, getters, age) 这种事不允许的 最多只能接收两个参数
+    //有的同学可能会说再传递一个age参数 类似这样 moreAgeStudent(state, getters, age) 但是这种情况是不允许的 最多只能接收两个参数
     moreAgeStudent(state) {
       // 如果要满足这个需求 我们要返回出去一个函数 在我们返回的函数里添加age参数(这样外接调用执行这个函数并且传参就可以了)
       return age => { //箭头函数一个参数不用加括号

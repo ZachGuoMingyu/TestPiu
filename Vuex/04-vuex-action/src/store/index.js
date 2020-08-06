@@ -23,7 +23,7 @@ const store = new Vuex.Store({
       // 先演示延时操作 当action开始用的时候这里注释掉
       // setTimeout(() => {
         state.count++
-      // }, 1000);
+      // }, 2000);
     },
 
     // action传递参数
@@ -45,7 +45,7 @@ const store = new Vuex.Store({
     actionIncrement(context){
       // 进行异步操作
       setTimeout(() => {
-        //我们通过用context.commit的方法获取到我们上面的increment方法 然后回到App.vue 把我们的increment方法的实现换成使用action
+        //因为在当前环境下context理解为store对象 所以我们通过用context.commit的方法获取到我们上面的increment方法 然后回到App.vue 把我们的increment方法的实现换成使用action
         context.commit('increment')
       }, 1000);
     },

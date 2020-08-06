@@ -25,10 +25,15 @@ export default {
   methods: {
     
     increment(){
+      // 我们现在mutations中进行延时操作来看一下 为什么异步操作要放到actions中
+      // 我们发现 devtools监测到的数据和我们实际的count不符 那么我们将延时操作放到actions中去处理
+      // this.$store.commit('increment')
+
+      // 去actions里新建方法
       // 使用action 这里我们要使用dispatch 可以回到ppt看之前的图 参数也是把我们action中的方法名传进去就可以
-      this.$store.dispatch('actionIncrement')
+      // this.$store.dispatch('actionIncrement')
       // 传递payload
-      // this.$store.dispatch('actionIncrement',{count: 5})
+      this.$store.dispatch('actionIncrement',{count: 5})
     },
     decrement(){
       this.$store.commit('decrement')
