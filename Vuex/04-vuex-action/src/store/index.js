@@ -36,7 +36,11 @@ const store = new Vuex.Store({
     decrement(state){
       state.count--
     },
-    
+
+    // 模拟网络操作
+    receiveNetWork(state, payload){
+      console.log(payload);
+    }
   },
   actions:{
     // 我们可以把上面的延时操作放到我们action中来执行
@@ -58,6 +62,15 @@ const store = new Vuex.Store({
     //     context.commit('increment', payload)
     //   }, 1000);
     // }
+
+
+    // 当我们处理网络操作时可以这样做
+    simulateNetWork(context){
+      setTimeout(() => {
+        // 我们在这里模拟1s 后拿到一个对象数据
+        context.commit('receiveNetWork',{name:'zhangsan', age: 18})
+      }, 1000);
+    }
   },
   getters:{
     // 平方

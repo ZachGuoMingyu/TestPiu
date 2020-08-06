@@ -34,6 +34,10 @@ export default {
       // this.$store.dispatch('actionIncrement')
       // 传递payload
       this.$store.dispatch('actionIncrement',{count: 5})
+
+      // 模拟网络操作 因为网络操作我们放在actions中实现 那么在外界传递参数是不现实的 所以我们在外面调用actions中的方法 actions中的方法内部也可以传递参数 也就是拿到请求数据后进行传递
+      this.$store.dispatch('simulateNetWork')
+
     },
     decrement(){
       this.$store.commit('decrement')
