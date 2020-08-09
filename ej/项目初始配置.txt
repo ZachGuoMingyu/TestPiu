@@ -1,0 +1,56 @@
+项目初始配置.txt
+	项目线上地址：http://47.106.244.1/ej/#/login?redirect=%2Fdashboard
+
+	axios中的默认地址也需要更换
+
+	先把登录配置修改一下
+		1、在swagger中讲后台接口地址复制 http://134.175.100.63:5588/
+		2、来到 src -> utils -> request.js文件内 第八行 baseURL 替换成我们自己的 http://134.175.100.63:5588/
+		3、再找到 .env.production  将里面的VUE_APP_BASE_API 也给替换成http://134.175.100.63:5588/
+		4、来到 store -> modules -> user.js 第三十五行 login({ username: username.trim(), password: password }) 在里面新增一个type  type:'manager'
+		5、然后我们保存 刷新 回到项目中看此时的登录是否能成功 我们发现 登录不进去了 告诉大家一个账号 admin 123231使用这个就可以登录进来 这个是已经注册好的
+
+	处理日期的时候要用到过滤器 
+
+
+创建App端项目
+	vant组件库 主要用于手机端
+	elementui 主要用于PC端
+
+创建项目
+	vue create ej_custormer
+	将router和Vuex全部按上
+
+	进入新建的项目中
+	安装依赖
+		axios 
+		qs (qs是一个url参数转化（parse和stringify）的js库) 
+
+		lodash  Lodash是一个著名的javascript原生库，不需要引入其他第三方依赖。是一个意在提高开发者效率,提高JS原生方法性  能的JS库。简单的说就是，很多方法lodash已经帮你写好了，直接调用就行，不用自己费尽心思去写了，而且可以统一方法的一致性。Lodash使用了一个简单的 _ 符号，就像Jquery的 $ 一样，十分简洁。
+
+		moment 日期处理类库
+
+		这四个依赖我们可以一起安装
+		npm install axios qs lodash moment --save
+
+		安装vant
+		我们使用vue add vant来安装
+
+		安装好以后启动项目
+
+		画图描述一下app框架的搭建 通过底部导航栏 跳转到不同的界面 但是 登录界面是没有底部导航栏的 所以 登录界面和首页我们要分开处理 那我们就新建一个登录界面
+
+		这里面我们需要两个容器 
+		第一个容器 App.vue  用来放  --> login.vue home.vue  
+		第二个容器 home.vue 用来放我们的子页面  index首页 order订单 user我的 所以home.vue 也需要router-view
+
+		接下来我们新建页面 先在views下面新建文件夹 我们叫manager(自定义的名称) 在其下面新建index(首页)，order和user界面
+
+		创建完界面后 开始配置路由 配置完以后 在浏览器中 改变url来看一下是否配置成功 url/login等
+
+		接下来开始写登录界面
+
+
+
+
+

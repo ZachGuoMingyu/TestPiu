@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  <script>
+    
+    // 1.请求方向拦截器
+    axios.interceptors.request.use( config => {
+
+      // 可以在请求拦截器里面做什么呢？
+      // 1.当发送网络请求的时候，在页面中添加一个loading组件，作为动画
+      // 2.用户需要登录，判断用户是否有token，有的话就跳转到界面，没有的话回到登录界面
+      // 等等
+      console.log(config);
+      console.log('进入请求拦截器');
+      return config //记得放回config 放行请求
+    },err => {
+      console.log('请求方向失败');
+    })
+
+    // 2.响应方向的拦截器
+    axios.interceptors.response.use( config => {
+      // 根据status 状态码 去执行一些操作
+      console.log(config.data.status);
+      console.log('进入响应拦截器');
+      return config //记得放回config 放行请求
+    },err => {
+      console.log('响应方向失败');
+    })
+
+    axios.get('http://47.106.244.1:8099/manager/category/findAllCategory')
+    .then(res => {
+      console.log('1.无参get请求',res);
+      // catch 请求错误输出
+    }).catch( err => {
+      console.log('1.无参get请求',err);
+    })
+  </script>
+</body>
+
+</html>

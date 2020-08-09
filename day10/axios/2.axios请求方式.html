@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  <script>
+
+    // 1.无参get请求
+    axios.get('http://47.106.244.1:8099/manager/category/findAllCategory')
+    .then(res => {
+      console.log('1.无参get请求',res);
+      // catch 请求错误输出
+    }).catch( err => {
+      console.log('1.无参get请求',err);
+    })
+
+    // 2.有参get请求
+    axios.get('http://47.106.244.1:8099/manager/category/findCategoryByCategoryname',
+      {params:{name: '体育'}}).then(res => {
+        console.log('2.有参get请求', res);
+      }).catch(err => {
+        console.log('2.有参get请求', err);
+      })
+    
+    // 3.发送post请求 无参
+    axios.post('http://47.106.244.1:8099/manager/user/logout')
+    .then(res => {
+      console.log('3.无参post请求', res);
+      // catch 请求错误输出
+    }).catch(err => {
+      console.log('4.无参post请求', err);
+    })
+
+    // 4.有参post请求
+    axios.post('http://134.175.100.63:5588/order/queryPage', 'page=1&pageSize=10')
+    .then(res => {
+      console.log('4.有参post请求', res);
+      // catch 请求错误输出
+    }).catch(err => {
+      console.log('4.有参post请求', err);
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  <script>
+
+    // 全局配置
+    // 设置baseURL 
+    axios.defaults.baseURL = 'http://47.106.244.1:8099/manager'
+
+    // 设置超时时间 不要设置的太低
+    axios.defaults.timeout = 5000;
+
+    // content-Type
+
+    // 1.无参get请求
+      axios.get('category/findAllCategory')
+        .then(res => {
+          console.log('1.无参get请求', res);
+          // catch 请求错误输出
+        }).catch(err => {
+          console.log('1.无参get请求', err);
+        })
+  </script>
+</body>
+
+</html>

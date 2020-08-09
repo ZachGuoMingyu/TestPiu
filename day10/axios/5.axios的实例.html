@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  <script>
+    // axios的实例
+    let newVar = axios.create({
+      // baseURL
+      baseURL: 'http://47.106.244.1:8099/manager',
+      timeout: 5000
+    })//axios的实例，只有在使用实例的时候才会生效
+
+    newVar({
+      url: 'category/findAllCategory',
+    }).then(res => {
+      console.log(res);
+    })
+
+  </script>
+</body>
+
+</html>

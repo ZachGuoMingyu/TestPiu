@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  <script>
+
+    // 并发请求第一种方式
+    // axios.all([
+    //   axios.get('http://47.106.244.1:8099/manager/category/findAllCategory'),
+    //   axios.get('http://47.106.244.1:8099/manager/category/findCategoryByCategoryname',
+    //     { params: { name: '体育' } })
+    // ]).then( res => {
+    //   console.log(res[0]);
+    //   console.log(res[1]);
+    // }).catch(err => {
+    //   console.log(err);
+    // })
+
+    // 并发请求第二种方式
+    axios.all([
+        axios.get('http://47.106.244.1:8099/manager/category/findAllCategory'),
+        axios.get('http://47.106.244.1:8099/manager/category/findCategoryByCategoryname',
+          { params: { name: '体育' } })
+      ]).then(
+        // axios.spread
+        axios.spread((res1, res2) => {
+          console.log(res1);
+          console.log(res2);
+        })
+      ).catch(err => {
+        console.log(err);
+      })
+    
+  </script>
+</body>
+
+</html>

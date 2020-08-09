@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.19.2/axios.min.js"></script>
+  <script>
+
+    // 无参get请求
+    axios({
+      url: 'http://47.106.244.1:8099/manager/category/findAllCategory',
+      method: 'get'
+    }).then(res => {
+      console.log('1.无参get请求', res);
+    })
+
+    // 有参get请求
+    axios({
+      url: 'http://47.106.244.1:8099/manager/category/findCategoryByCategoryname?name=体育',
+      method: 'get'
+    }).then(res => {
+      console.log('2.有参get请求第一种方式', res);
+    })
+
+    axios({
+      url: 'http://47.106.244.1:8099/manager/category/findCategoryByCategoryname',
+      params:{
+        name: '体育'
+      },
+      method: 'get'
+    }).then(res => {
+      console.log('3.有参get请求第二种方式', res);
+    })
+    
+    // 无参post请求
+    axios({
+      url: 'http://47.106.244.1:8099/manager/user/logout',
+      method: 'post'
+    }).then(res => {
+      console.log('4.无参post请求', res);
+    })
+
+    // 有参post请求
+    axios({
+      url: 'http://134.175.100.63:5588/order/queryPage',
+      params:{
+        page: 1,
+        pageSize: 10
+      },
+      method: 'post'
+    }).then(res => {
+      console.log('5.有参post请求', res);
+    })
+  </script>
+</body>
+
+</html>
