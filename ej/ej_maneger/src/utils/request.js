@@ -6,7 +6,8 @@ import { getToken } from '@/utils/auth'
 // create an axios instance
 const service = axios.create({
   // 将baseURL换成我们自己的地址
-  baseURL: 'http://134.175.100.63:5588/', // url = base url + request url
+  // baseURL: 'http://39.105.67.242:5588/', // url = base url + request url
+  baseURL: 'http://134.175.100.63:5588/',
   // withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 })

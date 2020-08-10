@@ -18,7 +18,7 @@
     <!-- 表格区域 -->
     <div class="custormer_table">
       <!-- 去组件库中找一个表格组件放进来 把数据也拷贝进来-->
-      <!-- el-table 加一个size="small" 属性 -->
+      <!-- el-table 加一个size="small" 属性 大家可以根据自己的样式 可加可不加-->
       <!-- 根据原型图 修改label名称 传入对应的数据 -->
       <!-- 拿到数据以后把绑定数组换成我们请求后拿到的数组 因为state的辅助函数放在计算属性中声明 所以我们可以直接把custormer当做计算属性来使用 去看下数据接口 custormer里的list是顾客信息 -->
       <!-- 设置完数据 把分页处理了 -->
@@ -58,7 +58,9 @@
     <!-- 模态框 -->
     <el-dialog :title="title" :visible.sync="dialogFormVisible">
       <el-form ref="ruleForm" :model="form" :rules="rules" label-width="120px">
+        <!-- el-form-item元素的prop属性绑定字段名username，表单验证时，就会验证el-input元素绑定的变量form.username的值是否符合验证规则 -->
         <el-form-item label="用户名" prop="username">
+          <!-- clearable一键清除 -->
           <el-input v-model="form.username" clearable placeholder="请输入用户名" />
         </el-form-item>
         <el-form-item label="姓名" prop="realname">
@@ -120,6 +122,7 @@ export default {
       // 表单验证规则
       rules: {
         username: [
+          // trigger: 'blur' 失去焦点是验证表单
           { required: true, message: '请输入用户名', trigger: 'blur' }
         ],
         realname: [
@@ -135,29 +138,8 @@ export default {
           { required: true, message: '请选择状态', trigger: 'change' }
         ]
       },
-      // 表格模拟数据
-      tableData: [
-        {
-          date: "2016-05-02",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-        },
-        {
-          date: "2016-05-04",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄",
-        },
-        {
-          date: "2016-05-01",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-        },
-        {
-          date: "2016-05-03",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-        },
-      ],
+      // 表格模拟数据 用完删掉了
+      
     };
   },
   created() {
@@ -192,6 +174,7 @@ export default {
       this.toLoadCustormer(params)
       // 设置完state的辅助函数后 再来设置总数据的显示 total
       .then(r => {
+        // 因为state中的custormer经过请求后会发生更新 所以我们将数据中的total进行匹配传给total
         this.total = this.custormer.total
       })
       // 配置完这个 就开始修改界面的数据
@@ -226,6 +209,7 @@ export default {
         // 如果status为空字符串 那么我们就查询全部
         // 可以直接在params中删除掉这个属性
         delete params.status
+        // 这里我们还是调用toLoadCustormer接口 接口可以根据status来查询数据
         this.toLoadCustormer(params)
         .then(r => {
           this.total = this.custormer.total
@@ -241,12 +225,13 @@ export default {
     },
     // 单个删除
     deleteHandler(id){
-      // this.$confirm elementui插件
+      // this.$confirm elementui插件 notice messagebox 确认消息
       this.$confirm('此操作将永久删除这条数据, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        // 先去配置删除方法
         this.deleteCustermer(id).then((res)=>{
           // 刷新数据 放在.then里的目的是 等数据删除完毕才会刷新 否则刷新先执行 删除后执行 数据显示会有问题
           this.findAllCustormer()
@@ -307,10 +292,10 @@ export default {
       })
     },
 
-    // 新增和编辑处理完以后 我们处理详情 新建一个详情组件
+    // 新增和编辑处理完以后 我们处理详情 新建一个详情组件 配置路由
     // 跳转到顾客详情
     toDetails(row){
-      // 跳转界面
+      // 跳转界面 要将顾客的id传递过去 因为后面界面的数据需要id来获取
       this.$router.push({path:'/custormer/custormerDetails', query:{id: row.id}})
     }
   },
@@ -336,6 +321,10 @@ export default {
   margin-top: 10px;
   margin-bottom: 10px;
 }
+/* 设置输入框样式 .el-input是el-input的默认样式 */
+.custormer_header .el-input{
+  width: 200px !important;
+}
 /* 设置表格区域样式 */
 .custormer_table {
   max-height: 500px;
@@ -348,9 +337,6 @@ export default {
   color: rgb(92, 174, 252);
   cursor: pointer;
 }
-/* 设置输入框样式 */
-.custormer_header .el-input{
-  width: 200px !important;
-}
+
 </style>
 

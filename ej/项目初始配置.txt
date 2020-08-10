@@ -6,9 +6,11 @@
 	先把登录配置修改一下
 		1、在swagger中讲后台接口地址复制 http://134.175.100.63:5588/
 		2、来到 src -> utils -> request.js文件内 第八行 baseURL 替换成我们自己的 http://134.175.100.63:5588/
-		3、再找到 .env.production  将里面的VUE_APP_BASE_API 也给替换成http://134.175.100.63:5588/
+		3、再找到 .env.production  将里面的VUE_APP_BASE_API 也给替换成http:http://134.175.100.63:5588/
 		4、来到 store -> modules -> user.js 第三十五行 login({ username: username.trim(), password: password }) 在里面新增一个type  type:'manager'
 		5、然后我们保存 刷新 回到项目中看此时的登录是否能成功 我们发现 登录不进去了 告诉大家一个账号 admin 123231使用这个就可以登录进来 这个是已经注册好的
+
+		注意！！！ 栏目管理的单词有问题 后面使用的时候全部使用customer
 
 	处理日期的时候要用到过滤器 
 

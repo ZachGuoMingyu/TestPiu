@@ -4,10 +4,10 @@ import qs from 'qs'
 // 全局配置
 // axios.defaults.headers.common["token"] = ""
 // axios.defaults.headers.post["Content-Type"] = 'application/x-www-form-urlencoded;charset=UTF-8';
-// 一个是类似于家政的接口
-axios.defaults.baseURL = 'http://39.105.67.242:5588/'
-// 一个是类似于外卖的接口
-// axios.defaults.baseURL = 'http://134.175.100.63:5588/'
+// 一个是家政的接口
+// axios.defaults.baseURL = 'http://39.105.67.242:5588/'
+// 一个是外卖的接口
+axios.defaults.baseURL = 'http://134.175.100.63:5588/'
 
 // Add a response interceptor
 axios.interceptors.response.use(function (response) {

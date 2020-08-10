@@ -27,7 +27,7 @@
         <!-- 计算总价部分 稍后完善 -->
         <!-- 因为数据比较少 所有 arr 和 product大家可以自己选择 也可以选择去使用外卖那个接口 -->
         <!-- 为了处理总价 这里我们循环加上index -->
-        <van-card v-for="(c, index) in productData" :key="c.id"
+        <van-card v-for="(c, index) in arr" :key="c.id"
           :num="c.number"
           :price="c.price"
           :desc="c.description"
@@ -105,7 +105,7 @@ import {mapActions, mapState} from 'vuex'
         // 我们传递过来的id就是栏目id
         // 拿到所有数据以后 我们可以根据栏目id进行一个过滤 categoryId
         let arr = this.productData.filter((item)=>{
-          return id == item.id
+          return id == item.categoryId
         })
         // arr 就是通过栏目过滤出来的产品
         this.arr = arr

@@ -1,6 +1,8 @@
 <template>
   <!-- 先去配置路由 -->
   <div class="custormerDetail">
+    <!-- 使用element 图标按钮 设置plain size="mini" -->
+    <el-button type="primary" icon="el-icon-arrow-left" @click="backToCustomer" size="mini" plain>顾客详情</el-button>
     <!-- 切换区域 -->
     <div class="tab">
       <!-- 去组件库中找el-tab组件 activeName也拷贝进来 把方法也拷贝进来 -->
@@ -28,7 +30,8 @@
           <!-- 先找个表格放在这里 -->
           <!-- {{orderData}} -->
           <!-- 日期过滤器 -->
-          {{orderData[0].orderTime | dateParse}}
+          <h2>{{orderData[0].orderTime | dateParse}}</h2>
+          
           <!-- 数据拿到了 大家根据之前的做法自己完善这一个部分 下面服务地址一样 -->
         </el-tab-pane>
         <el-tab-pane label="服务地址" name="third">
@@ -70,6 +73,10 @@
       // 点击标签页时触发的方法
       handleClick(tab, event) {
         console.log(tab, event);
+      },
+      // 返回上一级路由
+      backToCustomer(){
+        this.$router.go(-1)
       }
     },
   }
@@ -84,6 +91,10 @@
   background-color: #fff;
   padding: 10px;
   overflow: hidden;
+}
+/* 设置返回按钮样式 */
+.el-icon-back{
+  color: rgb(57, 157, 254);
 }
 /* 头像样式 */
 .avatar{

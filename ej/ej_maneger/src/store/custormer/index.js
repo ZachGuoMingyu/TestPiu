@@ -47,7 +47,7 @@ export default{
     async toLoadCustormer(context, params){
       // 分页查询顾客信息 需要参数 所以把params传递进去
       let res = await axios.post('/customer/query', params)
-      // 输出验证数据拿没拿到 保存后回到页面中 调用试一下
+      // 输出验证数据拿没拿到 保存后回到页面中 调用试一下 这里去界面中讲解辅助函数的使用
       // console.log(res.data.data);
       // 将我们拿到的数据传递给mutations mutations改变state中的属性
       context.commit('setCustormer', res.data.data)
