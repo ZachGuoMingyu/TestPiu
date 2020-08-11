@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>新增</button>
+  <button>修改</button>
+  <div>标题</div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  <script>
+    $(function () {
+      // 先根据亚蓉的笔记去描述一下
+      // 点击新增或者修改按钮，改变div内部的内容
+      // 第一个参数 事件类型 第二个参数(可选) 要传递的参数 第三个参数 事件处理函数
+      /*
+        传入第二个参数 存放在event.data里 可以通过event.data获取到
+        $('button').bind('click', '123',function (event) {
+          // '123'是保留在 event.data = 123 中的
+          // console.log(1)
+          // console.log(event)
+  
+          // 点击按钮
+          console.log(event.data)
+        })
+      */
+      // 我们这里绑定一个事件 来处理新增和修改
+      // 我们这里使用target来处理 触发事件的DOM元素
+      $('button').bind('click', function (event) {
+        // 通过event.target(DOM节点，可以拿到内部的内容，$(DOM).html()) 来判断当前是哪个按钮点击
+        // 将event.target转换成DOM对象，获取button的文本
+        console.log(event)
+        // .html()获取内部内容
+        if ($(event.target).html() === '新增') {
+          $('div').html('新增学生信息')
+        } else {
+          $('div').html('修改学生信息')
+        }
+        // 这里我们没有用到传参，我们是直接通过event.target来获取到按钮的文本；但是在实际开发中，我们可能要根据一些后台返回来的数据去进行判断，这个时候我们会用到第二个参数，也就是传递的参数，后期我们遇到再详细讲
+      })
+
+      // // 解绑 unbind 不传参数 解除绑定的所有事件
+      // $('button').unbind();
+
+      // // 解绑click 传递参数 参数为某事件类型时，移除该事件类型上的所有绑定的处理程序。
+      // $('button').unbind('click');
+
+      // // 解绑click对应的事件 第二个参数传要解除的事件名称 只会解绑click函数 不会对我们上面的有影响
+      function click() {
+        console.log('我是click事件');
+      }
+      $('button').click(click)
+      $('button').unbind('click', click);
+
+      // // 绑定多个事件 
+      // $('button').bind({
+      //   click:function(){},
+      //   mouseover:function(){}
+      // })
+    })
+    
+  </script>
+</body>
+</html>

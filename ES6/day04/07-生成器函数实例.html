@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 异步编程
+    // 1s后控制台输出111 2s后输出222 3s后输出333
+    // 我们使用之前的方法 setTimeout
+    // setTimeout(() => {
+    //   console.log(111);
+    //   setTimeout(() => {
+    //     console.log(222);
+    //     setTimeout(() => {
+    //       console.log(333);
+    //       // 如果我们以后还有异步任务 你会发现嵌套的层数越来越多 和我们之前讲promise时的举例类似 阅读不方便 调试错误也不方便 这种现象我们叫做 回调地狱
+    //     }, 3000);
+    //   }, 2000);
+    // }, 1000);
+
+    // 我们先定义三个函数
+    function one() {
+      setTimeout(() => {
+        console.log(111);
+        a.next()
+      }, 1000);
+    }
+
+    function two() {
+      setTimeout(() => {
+        console.log(222);
+        a.next()
+      }, 2000);
+    }
+
+    function three() {
+      setTimeout(() => {
+        console.log(333);
+        a.next()
+      }, 3000);
+    }
+
+    // 使用生成器函数来处理这三个任务
+    function * gen() {
+      yield one()
+      yield two()
+      yield three()
+    }
+
+    // 调用生成器函数
+    let a = gen()
+    a.next()
+    // 但是我们发现 输出111以后 222不走了 那怎么让2走呢？ 我们去one里面 执行a.next()
+  </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="books.length">
+            <center>
+                <h3>书籍的相关操作</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>书籍名称</th>
+                            <th>出版日期</th>
+                            <th>价格</th>
+                            <th>购买数量</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item,index) in books">
+                            <td>{{item.id}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.date}}</td>
+                            <td>{{item.price | showPrice}}</td>
+                            <td>
+                                <button @click="decrement(index)" :disabled="item.count<=1">-</button>
+                                <input type="text" v-model="item.count">
+                                <button @click="increment(index)">+</button>
+                            </td>
+                            
+                            <td>
+                                <button @click="removeHandle(index)">移除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </center>
+            <h2>总价格为：{{totalPrice | showPrice}}元</h2>
+        </div>
+        <h2 v-else>当前购物车为空</h2>
+        <!-- 新增的结构 -->
+        <br>
+        <center>
+            <div class="book">
+                <!-- 编号 -->
+                <label for="id">
+                    id:<input type="text" id="id" v-model="id">
+                </label>
+                <!-- 名称 -->
+                <label for="name">&nbsp;&nbsp;
+                    名称:<input type="text" id="name" v-model="name">
+                </label>
+                <!-- 日期 -->
+                <label for="date">&nbsp;&nbsp;
+                    日期:<input type="text" id="date" v-model="date">
+                </label>
+                <!-- 价格 -->
+                <label for="price">&nbsp;&nbsp;
+                    价格:<input type="text" id="price" v-model="price">
+                </label>
+                <!-- 数量 -->
+                <label for="count">&nbsp;&nbsp;
+                    数量:<input type="text" id="count" v-model="count">
+                </label>
+                <button @click="addBook">添加</button>
+            </div>
+        </center>
+        
+    </div>
+    <script src="../js/vue.js"></script>
+    <script src="./main.js"></script>
+
+</body>
+
+</html>

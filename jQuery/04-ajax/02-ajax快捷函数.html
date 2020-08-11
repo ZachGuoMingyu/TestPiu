@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <button>加载数据</button>
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  <script>
+    // ajax快捷函数 $.get
+    // 第一个参数url 第二个参数(可选) 传递的参数 第三个参数 成功回调
+    $.get('https://api.apiopen.top/musicRankings', {}, function (res) {
+      console.log('快捷函数$.get', res);
+    })
+
+    // ajax快捷函数 $.post
+    // 第一个参数url 第二个参数(可选) 传递的参数 第三个参数 成功回调
+    $.post('http://134.175.100.63:5588/user/logout', {}, function (res) {
+      console.log('快捷函数$.post', res);
+    })
+
+    // ajax快捷函数 $.getJSON 后台返回的数据类型是json的时候使用该方法
+    $.getJSON('https://api.apiopen.top/musicRankings', {}, function (res) {
+      console.log('快捷函数$.getJSON', res);
+    })
+
+  </script>
+</body>
+
+</html>

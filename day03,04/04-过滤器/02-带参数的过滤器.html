@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 需求 使用过滤器格式化日期 将时间格式化为yyyy-MM-dd-->
+  <div id="app">
+    <!-- 使用过滤器显示日期 传递的参数由arg来接收 -->
+    {{date | format('yyyy-MM-dd')}}
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        // 获取当前时间函数
+        date: new Date()
+      },
+      // 使用局部过滤器来操作
+      filters:{
+        format(val, arg){
+          console.log(arg);
+          // 处理格式
+          //getFullYear()获取年份 因为val.getMonth()显示的是0到11 所以我们加一 显示1到12
+          // 如果我们自己处理 需要写好多的判断来接收传递进来的格式进行拼接显示 那么我们可以使用一个现成的js文件
+          if (arg == 'yyyy-MM-dd') {
+            let date = ''
+            date = val.getFullYear() + '-' + (val.getMonth() + 1) + '-' + val.getDate()
+            return date
+          }else{
+            return '当前格式不符合'
+          }
+          
+        }
+      }
+  })
+  </script>
+</body>
+</html>

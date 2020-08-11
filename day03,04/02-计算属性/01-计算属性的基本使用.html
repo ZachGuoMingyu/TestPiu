@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 以前我们拼接数据这样做 -->
+    <h2>{{firstName}} {{lastName}}</h2>
+    <h2>{{firstName + ' ' + lastName}}</h2>
+
+    <!-- 通过methods -->
+    <h2>{{getFullName()}}</h2>
+
+    <!-- 通过计算属性 计算属性不需要加小括号 因为我们是把它当做一个属性来用的 -->
+    <h2>{{fullName}}</h2>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        firstName: 'lebron',
+        lastName: 'james'
+      },
+      methods: {
+        getFullName(){
+          return this.firstName + ' ' + this.lastName
+        }
+      },
+      // 计算属性
+      computed: {
+        fullName(){
+          return this.firstName + ' ' + this.lastName
+        }
+      },
+  })
+  </script>
+</body>
+</html>

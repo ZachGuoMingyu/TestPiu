@@ -37,25 +37,26 @@
       <el-pagination background @current-change="handleCurrentChange" :page-size="pageSize" layout="total,prev, pager, next" :total="total"></el-pagination>
     </div>
 
-    <!-- 模态框 -->
+    <!-- 模态框 先找一个基础模态框 -->
     <el-dialog :title="title" :visible.sync="dialogFormVisible">
-      <el-form ref="ruleForm" :model="form" :rules="rules" label-width="120px">
-        <!-- el-form-item元素的prop属性绑定字段名username，表单验证时，就会验证el-input元素绑定的变量form.username的值是否符合验证规则 -->
+      <!-- Form form表单 表单验证  -->
+      <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="120px">
+        <!-- el-form-item元素的prop属性绑定字段名username，表单验证时，就会验证el-ruleForm.username的值是否符合验证规则 -->
         <el-form-item label="用户名" prop="username">
           <!-- clearable一键清除 -->
-          <el-input v-model="form.username" clearable placeholder="请输入用户名" />
+          <el-input v-model="ruleForm.username" clearable placeholder="请输入用户名" />
         </el-form-item>
         <el-form-item label="姓名" prop="realname">
-          <el-input v-model="form.realname" clearable placeholder="请输入姓名" />
+          <el-input v-model="ruleForm.realname" clearable placeholder="请输入姓名" />
         </el-form-item>
         <el-form-item label="手机号" prop="telephone">
-          <el-input v-model="form.telephone" clearable placeholder="请输入手机号" />
+          <el-input v-model="ruleForm.telephone" clearable placeholder="请输入手机号" />
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input v-model="form.password" type="password" clearable placeholder="请输入密码" />
+          <el-input v-model="ruleForm.password" type="password" clearable placeholder="请输入密码" />
         </el-form-item>
         <el-form-item label="状态" prop="status">
-          <el-select v-model="form.status" placeholder="请选择状态">
+          <el-select v-model="ruleForm.status" placeholder="请选择状态">
             <el-option label="禁用" value="禁用" />
             <el-option label="启用" value="启用" />
           </el-select>
@@ -88,8 +89,6 @@ export default {
       // custormerData: this.custormer.list,
       // 表单的名字
       title: '添加顾客信息',
-      // 双向数据绑定表单
-      form: {},
       // 是我们绑定的对象 存放数据
       ruleForm: {
         username: '',
@@ -206,26 +205,30 @@ export default {
       // 信息赋值
       // 如果我们直接将row赋值给this.form 我们会发现即使没有提交 表单里也会双向数据绑定 
       // 所以我们使用结构赋值先将对象解构 然后用一个新的对象包裹 内容相同 但是内存地址不一样了 所以就不会有之前的那种情况了
-      this.form = {...row}
+      this.ruleForm = {...row}
       // 打开模态框
       this.dialogFormVisible = true
     },
     // 新增顾客
     addCustormer(){
       // 表单数据置空
-      this.form = {}
+      this.ruleForm = {}
       this.dialogFormVisible = true
     },
     // 保存
-    toSave(form) {
-      // 表单验证
-      this.$refs[form].validate((valid) => {
+    toSave(ruleForm) {
+      // 在 rules 这里写了对表单的验证规则，但是我们如何在 methods 里对指定的表单进行认证呢？
+      // 可以根据在 el-form 里定义的 ref="ruleForm"，在 methods 里可以通过 $refs[ruleForm]拿到指定的表单
+      // 这样我们就可以对指定的表单根据写好的 rules 认证。
+
+      // 表单验证 validate是element封装好的用于表单的验证 验证通过继续下一步 
+      this.$refs[ruleForm].validate((valid) => {
         if (valid) {
           // 调用接口传递表单参数
-          this.saveCategory(this.form).then(r => {
+          this.saveCategory(this.ruleForm).then(r => {
         
             let messageInfo = "";
-            if (this.form.id) {
+            if (this.ruleForm.id) {
               messageInfo = "修改";
             } else {
               messageInfo = "新增";

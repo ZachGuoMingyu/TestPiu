@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="canvas" width="400px" height="400px"></canvas>
+
+  <script>
+    window.onload = function () {
+      // 获取canvas
+      var canvas = document.getElementById('canvas')
+      // 获取2d上下文
+      var context = canvas.getContext('2d')
+      // 绘制文本
+      context.font = 'italic 30px sans-serif';
+      //使用textBaseline 需要自己先画一条线 baseline是基于这条线的
+      context.moveTo(100, 100);
+      context.lineTo(200, 100);
+      context.strokeStyle = "red";
+      context.stroke();
+      context.textBaseline = "top"; 
+
+      // 勾勒文本 strokeText(text,x,y,width)
+      // context.strokeText('hello canvas', 100, 100, 100)
+      // 填充文本 fillText(text,x,y,width)
+      context.fillText('hello canvas', 100, 100, 100)
+
+    }
+  </script>
+</body>
+
+</html>

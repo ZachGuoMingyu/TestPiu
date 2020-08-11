@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    // 我们这里使用promise处理网络请求 使用我们之前的获取所有栏目接口
+    // 这里面promise就是一个存放异步操作的容器 
+    let promise = new Promise((resolve, reject) => {
+      // 使用ajax
+      $.ajax({
+        url: 'http://47.106.244.1:8099/manager/category/findAllCategory',
+        method: 'get',
+        data:{},
+        success(res){
+          // 在ajax成功请求之后调用reslove函数 传递请求成功的数据res实参
+          resolve(res)
+        },
+        error(err){
+          // 在ajax失败请求之后调用reject函数 传递请求失败的数据err实参
+          reject(err)
+        }
+      })
+    })
+
+    // 异步操作结束后进行一些操作 使用promise对象的then和catch方法
+    // 当前我们的promise.then 与 promise对象处于同一级 也就是异步编码 同步编写 当promise对象里执行到success时，我们下面的then和catch才会调用
+    promise.then((response) => {
+      console.log(response);
+      // 我们把之前放在成功回调里的数据处理来放到then里面来做
+    }).catch((error) => {
+      console.log(error);
+    })
+
+  </script>
+</body>
+</html>

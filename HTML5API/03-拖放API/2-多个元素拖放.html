@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 我们也要给body设置一个样式 因为我们从parent往外面拖放时 是拖放到body中 */
+    body{
+      height: 500px;
+      border: 1px solid green;
+    }
+    .parent{
+      height: 130px;
+      border: 1px solid red;
+      margin: 10px;
+    }
+    .child{
+      width: 100px;
+      height: 100px;
+      border: 1px solid blue;
+      margin: 10px;
+      float: left;
+    }
+  </style>
+</head>
+<body>
+  <!-- 需求 可以将五个child拖放到两个parent中 也可以将parent中的child拖放出来 -->
+  <div class="parent"></div>
+  <div class="parent"></div>
+  <!-- 将拖放元素设置为可拖放的 -->
+  <div draggable="true" class="child" id="one">1</div>
+  <div draggable="true" class="child" id="two">2</div>
+  <div draggable="true" class="child" id="three">3</div>
+  <div draggable="true" class="child" id="four">4</div>
+  <div draggable="true" class="child" id="five">5</div>
+  <script>
+    window.onload = function () {
+      // 2.获取拖放元素
+      var children = document.getElementsByClassName('child')
+      // 将children转换为数组 Array.from将一个类数组对象转换成数组
+      children = Array.from(children)
+
+      // 3.获取目标元素
+      var parents = document.getElementsByClassName('parent')
+      // 将parents转换为数组 Array.from将一个类数组对象转换成数组
+      parents = Array.from(parents)
+
+      // 4.绑定事件  
+      // 绑定拖放元素事件 需要拿到一个一个的拖放元素去绑定
+      children.forEach(function (item) {
+        // item ==> 拖放元素
+        // 把我们写好的事件处理程序绑定到ondragstart上
+        item.ondragstart = ds
+      })
+
+      // 绑定放置元素事件 需要拿到一个一个的放置元素
+      parents.forEach(function (item) {
+        // item ==> 目标元素
+        // 把我们写好的事件处理程序绑定到ondragover和ondrop上
+        item.ondragover = dover
+        item.ondrop = dr
+      })
+
+      // 5.给body也绑定事件 当我们要在parent div向外拖放的时候 需要把body设置成放置元素
+      document.body.ondragover = dover
+      document.body.ondrop = dr
+      // 但是我们发现有问题 当我们拖放到parent div的时候 会冒泡回到body 所以我们要阻止冒泡的发生
+      // 到function dr()中处理
+
+
+
+      // 1.事件处理程序的声明 因为我们的目标元素和拖放元素都是多个 我们先批量处理 然后再进行筛选
+      // dragstart 拖放开始事件
+      function ds(event) {
+        // 获取传输对象
+        var dt = event.dataTransfer
+        // 我们这里设置this.id  那么谁调用它 谁就是this 比如one.ds one就是this
+        dt.setData('id', this.id)
+
+        // 6.设置鼠标的样式 copy, move, link, none…
+        dt.effectAllowed = 'copy'
+      }
+      // dragover 在目标元素内移动 因为do是关键字 所以我们叫dover
+      function dover(event) {
+        // 阻止默认行为 设置目标元素可放置
+        event.preventDefault(); 
+
+        // 设置拖放过程中的鼠标样式 其他样式大家自己试一下
+        event.dataTransfer.dropEffect = 'copy'
+      }
+      // drop 将拖放元素放置到目标元素内时触发
+      function dr(event) {
+        // 获取开始拖放时保存的id值
+        // 拖放数据传输对象
+        var dt = event.dataTransfer
+        // 通过getData获取到id
+        var id = dt.getData('id')
+        // 通过id获取DOM节点
+        var dom = document.getElementById(id)
+        // 追加到parent元素内部
+        this.appendChild(dom)
+
+        // 阻止事件冒泡
+        event.stopPropagation()
+
+        // 如果发现拖动的时候出现多选项卡 需要阻止默认行为
+        event.preventDefault()
+      }
+    }
+  </script>
+</body>
+</html>

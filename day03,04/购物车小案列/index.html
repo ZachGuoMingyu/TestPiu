@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- 整体布局写完以后 记得在这里加个v-if 判断一下没有数据的时候显示一个提示 -->
+    <div v-if="books.length">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th>书籍名称</th>
+            <th>出版日期</th>
+            <th>价格</th>
+            <th>购买数量</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(item, index) in books">
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.date}}</td>
+            <!-- 这里的价格我们要加￥和小数点保留两位 -->
+            <td>{{item.price | showPrice}}</td>
+            <td>
+              <button @click="decrement(index)" :disabled="item.count <= 1">-</button>
+              {{item.count}}
+              <button @click="increment(index)">+</button>
+            </td>
+            <td>
+              <button @click="removeHandle(index)">移除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h2>总价格为:{{totalPrice | showPrice}}</h2>
+    </div>
+    <!-- 没有数据的时候显示一个提示 -->
+    <h2 v-else>当前购物车为空</h2>
+    <div class="book">
+      <div>
+        <label for="id">
+          编号：
+        </label>
+        <input type="text" id="id" v-model='id'>
+        <label for="name">
+          名称：
+        </label>
+        <input type="text" id="name" v-model='name'>
+        <label for="name">
+          日期：
+        </label>
+        <input type="text" id="name" v-model='date'>
+        <label for="name">
+          价格：
+        </label>
+        <input type="text" id="name" v-model='price'>
+        <label for="name">
+          数量：
+        </label>
+        <input type="text" id="name" v-model='count'>
+        <button @click='addBook'>添加</button>
+      </div>
+    </div>
+  </div>
+  <!-- 记得导入这两个 -->
+  <script src="../js/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

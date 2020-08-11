@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 这里我们使用动态绑定属性 将props中设置的值动态绑定 后面表达式里的值是父组件data中的属性 这个时候 父组件中的data中的数据 就会被props中的cmovies接收到 -->
+    <cpn :cmessage="message" :cmovies="movies"></cpn>
+  </div>
+  <!-- 创建组件模板 -->
+  <template id="cpn">
+    <div>
+      <ul v-for="item in cmovies">
+        <li>{{item}}</li>
+      </ul>
+      <h2>{{cmessage}}</h2>
+    </div>
+  </template>
+  <script src="../js/vue.js"></script>
+  <script>
+    const cpn = {
+      template: '#cpn',
+      // 使用props来进行父组件向子组件传值
+      // props第一种写法 数组语法 当我们在上面进行绑定之后 便可以在子组件中使用cmessage或cmovies了
+      // props: ['cmessage','cmovies']
+
+      // props第二种写法 对象语法
+      props: {
+        // 1.限制类型 在对象语法中 我们可以只对其类型进行限制 也就是父组件中要传递给子组件的数据类型 必须满足我们限制的数据类型
+        // cmovies: Array, 
+        // cmessage: String
+
+        // 除了类型的限制 还可以对一些其他属性进行限制
+        // 2.提供一些默认值，以及必传值
+        cmessage :{
+          // 类型
+          type: String,
+          // 是否为必选
+          required: true,
+          // 默认值 当cmessage没有数据传递时 显示默认值
+          default: '我是message的默认值'
+        },
+        cmovies: {
+          type: Array,
+          // 当数据类型为数据或者对象时 默认值必须是一个返回函数
+          default(){
+            return ['1','2','3']
+          }
+        }
+      }
+    }
+    const app = new Vue({
+      el: '#app',
+      data: {
+        // 如果我们在子组件中想要使用父组件中的movies数组 我们通过什么方式才能把我们父组件的data里的数据传递给子组件呢？ 使用props
+        message: '你好啊，我是父组件',
+        movies: ['海王','海贼王','复仇者联盟']
+      },
+      components: {
+        // cpn:cpn
+        cpn
+      }
+  })
+  </script>
+</body>
+</html>

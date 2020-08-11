@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div{
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <button class="hide">隐藏</button>
+  <button class="show">显示</button>
+  <button class="toggle">切换</button>
+  <!-- 自定义动画最后讲 -->
+  <button class="own">自定义动画</button>
+  <div>hello</div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  <script>
+    // 设置隐藏点击事件
+    $('.hide').click(function () {
+      // 隐藏 .hide() 默认是立即隐藏 
+      // $('div').hide(2000)
+
+      // 淡出 fadeOut
+      // $('div').fadeOut(2000)
+
+      // 滑上 slideUp
+      $('div').slideUp(2000)
+
+    })
+
+    // 设置显示点击事件
+    $('.show').click(function () {
+      // 显示 show()
+      // $('div').show(2000)
+
+      // 淡入 fadeIn
+      // $('div').fadeIn(2000)
+
+      // 淡入到某个透明度停止 第一个参数 事件 第二个参数 透明度
+      // $('div').fadeTo(2000, 0.5)
+
+      // 滑下 slideDown
+      $('div').slideDown(2000)
+
+    })
+
+    // 设置切换点击事件
+    $('.toggle').click(function () {
+      // 切换 show()
+      // $('div').toggle(2000)
+
+      // 淡入淡出切换 fadeToggle
+      // $('div').fadeToggle(2000)
+
+      // 滑上滑下切换
+      $('div').slideToggle(2000)
+    })
+
+    // 自定义动画
+    $('.own').click(function () {
+      // 自定义动画 animate方法 第一个参数 将要变化的属性 第二个参数 时长
+      $('div').animate({
+        width:'300px',
+        height:'200px',
+        marginTop:'100px'
+      },2000)
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>v-on</title>
+  <script src="./js/vue.js"></script>
+</head>
+<body>
+  <!-- 动态添加列表选项，并且可以删除 -->
+  <div id="app">
+    <input type="text" v-model="inputValue" />
+    <button @click="handleClick">提交</button>
+    <ul>
+      <li v-for="(item, index) of list" :key="index">
+        {{item}}----
+        <button @click="removeHandle(index)">删除</button>
+      </li>
+    </ul>
+  </div>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        inputValue: '',
+        list: []
+      },
+      methods: {
+        handleClick() {
+          this.list.push(this.inputValue)
+          this.inputValue = ''
+        },
+        removeHandle(index){
+          this.list.splice(index, 1)
+        }
+      }
+    })
+  </script>
+</body>
+</html>

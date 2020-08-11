@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="canvas" width="400px" height="400px"></canvas>
+
+  <script>
+    window.onload = function () {
+      // 获取canvas
+      var canvas = document.getElementById('canvas')
+      // 获取2d上下文
+      var context = canvas.getContext('2d')
+      // 渐变 填充模式 g
+      // 创建线性渐变的对象 参数：起始点x坐标，起始点y坐标，结束点x坐标，结束点y坐标
+      // 使用渐变绘制矩形后再来修改坐标 这个坐标我们要根据我们绘制的图形坐标去设置 设置不同的起止坐标 渐变发生的位置不同
+      // 从左到右渐变
+      // var g = context.createLinearGradient(0, 200, 400, 200)
+
+      // 从上到下渐变
+      var g = context.createLinearGradient(200, 0, 200, 400)
+
+      //  添加渐变颜色 参数：0-1之间的偏移量，颜色值
+      g.addColorStop(0.2, 'red')
+      g.addColorStop(0.8, 'blue')
+
+      // 渐变对象的使用
+      // 绘制 设置填充渐变
+      context.fillStyle = g
+      // 使用渐变绘制矩形
+      context.fillRect(0, 0, 400, 400)
+    }
+  </script>
+</body>
+
+</html>

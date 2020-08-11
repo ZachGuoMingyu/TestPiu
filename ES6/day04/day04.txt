@@ -1,0 +1,84 @@
+模板字符串 
+  `hello`
+  var a = 1;
+  'hello'+a+'world'   //hello1world
+  `hello${a}world`    // 如果使用模板字符串 变量可以用${a} 来表示 
+  是增强版的字符串，用反引号（`）标识。它可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量。
+  模板字符串中嵌入变量，需要将变量名写在${}之中。
+  let first = 'hello',last='world';
+  let name = 'Your name is ' + first + ' ' + last + '.';
+  let name = `Your name is ${first} ${last}. `;
+
+Symbol类型
+  Symbol是 JavaScript 语言的第七种数据类型，前六种是：undefined、null、布尔值（Boolean）、字符串（String）、数值（Number）、对象（Object）。
+
+  Symbol 值通过Symbol函数生成。这就是说，对象的属性名现在可以有两种类型，一种是原来就有的字符串，另一种就是新增的 Symbol 类型。凡是属性名属于 Symbol 类型，就都是独一无二的，可以保证不会与其他属性名产生冲突。
+  let s = Symbol();
+  typeof s  // "symbol"
+  上面代码中，变量s就是一个独一无二的值。typeof运算符的结果，表明变量s是 Symbol 数据类型，而不是字符串之类的其他类型。
+
+  Symbol函数可以接受一个字符串作为参数，表示对 Symbol 实例的描述，主要是为了在控制台显示，或者转为字符串时，比较容易区分。如果 Symbol 的参数是一个对象，就会调用该对象的toString方法，将其转为字符串，然后才生成一个 Symbol 值。
+
+  注意，Symbol函数的参数只是表示对当前 Symbol 值的描述，因此相同参数的Symbol函数的返回值是不相等的。
+
+  Symbol 值不能与其他类型的值进行运算，会报错。
+
+  但是，Symbol 值可以显式转为字符串。Symbol 值也可以转为布尔值，但是不能转为数值。
+
+  Symbol实例的description属性用来获取Symbol对象的描述信息
+
+async 函数
+  const test = async function () {
+    const res1 = await Promise.resolve('hello world');
+    const res2 = await Promise.resolve('hello world');
+    console.log(res1);
+    console.log(res2);
+  };
+  test();
+
+
+  ES2017 标准引入了 async 函数，使得异步操作变得更加方便。
+  async 函数是什么？一句话，它就是 Generator 函数的语法糖。
+  
+  优点
+    1）内置执行器。
+      async函数自带执行器。也就是说，async函数的执行，与普通函数一模一样，只要一行。
+    2）更好的语义。
+      async和await，比起星号和yield，语义更清楚了。async表示函数里有异步操作，await表示紧跟在后面的表达式需要等待结果。
+    3）更广的适用性。
+      co模块约定，yield命令后面只能是 Thunk 函数或 Promise 对象，而async函数的await命令后面，可以是 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时会自动转成立即 resolved 的 Promise 对象）。
+    4）返回值是 Promise。
+      async函数的返回值是 Promise 对象，这比 Generator 函数的返回值是 Iterator 对象方便多了。你可以用then方法指定下一步的操作。
+
+Generator函数
+  function* helloWorldGenerator() {
+    yield 'hello';
+    yield 'world';
+    return 'ending';
+  }
+
+  var hw = helloWorldGenerator();
+  hw.next() // { value: 'hello', done: false }
+  hw.next() // { value: 'world', done: false }
+  hw.next() // { value: 'ending', done: true }
+  hw.next() // { value: undefined, done: true }
+
+
+  Generator 函数是 ES6 提供的一种异步编程解决方案
+  Generator 函数是一个状态机，封装了多个内部状态，执行 Generator 函数会返回一个遍历器对象。调用遍历器对象的next方法，使得指针移向下一个状态。也就是说，每次调用next方法，内部指针就从函数头部或上一次停下来的地方开始执行，直到遇到下一个yield表达式（或return语句）为止。换言之，Generator 函数是分段执行的，yield表达式是暂停执行的标记，而next方法可以恢复执行。
+  Generator 函数是一个普通函数，但是有两个特征。一是，function关键字与函数名之间有一个星号；二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）。
+
+  yield表达式就是暂停标志，yield表达式只能用在 Generator 函数里面，用在其他地方都会报错。
+  yield表达式与return语句既有相似之处，也有区别。相似之处在于，都能返回紧跟在语句后面的那个表达式的值。区别在于每次遇到yield，函数暂停执行，下一次再从该位置继续向后执行，而return语句不具备位置记忆的功能。一个函数里面，只能执行一次（或者说一个）return语句，但是可以执行多次（或者说多个）yield表达式。正常函数只能返回一个值，因为只能执行一次return；Generator 函数可以返回一系列的值，因为可以有任意多个yield。从另一个角度看，也可以说 Generator 生成了一系列的值，这也就是它的名称的来历（英语中，generator 这个词是“生成器”的意思）。
+
+
+  遍历器对象的next方法的运行逻辑如下。
+  （1）遇到yield表达式，就暂停执行后面的操作，并将紧跟在yield后面的那个表达式的值，作为返回的对象的value属性值。
+  （2）下一次调用next方法时，再继续往下执行，直到遇到下一个yield表达式。
+  （3）如果没有再遇到新的yield表达式，就一直运行到函数结束，直到return语句为止，并将return语句后面的表达式的值，作为返回的对象的value属性值。
+  （4）如果该函数没有return语句，则返回的对象的value属性值为undefined。
+  需要注意的是，yield表达式后面的表达式，只有当调用next方法、内部指针指向该语句时才会执行，因此等于为 JavaScript 提供了手动的“惰性求值”（Lazy Evaluation）的语法功能。
+
+安装cnpm包管理工具
+  npm install -g cnpm --registry=https://registry.npm.taobao.org
+  使用 cnpm -v命令查看版本号

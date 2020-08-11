@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <div>{{msg}}</div>
+    <button @click='update'>更新</button>
+    <button @click='destroy'>销毁</button>
+  </div>
+  <script type="text/javascript" src="../js/vue.js"></script>
+  <script type="text/javascript">
+    /*
+      Vue实例的生命周期
+      
+    */
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        msg: '生命周期'
+      },
+      methods: {
+        // 更新数据 会执行更新的两个生命周期的函数
+        update: function(){
+          this.msg = 'hello';
+        },
+        // 销毁
+        destroy: function(){
+          // 调用了一个特殊的方法$destroy() 会销毁相关的属性 data，methods中的属性和方法 等 销毁以后 我们会发现 点击方法都没有效果了
+          this.$destroy();
+        }
+      },
+      // 八个生命周期的方法（钩子函数）
+      // 前四个方法 为挂载阶段
+      beforeCreate(){
+        console.log('beforeCreate');
+      },
+      created(){
+        console.log('created');
+      },
+      beforeMount(){
+        console.log('beforeMount');
+      },
+      // mounted需要我们特别关注 因为这个函数一旦被触发 就代表着初始化已经完成了 初始化完成之后 页面中的模板的内容就已经存在了 模本内容存在了 我们就可以向里面填充数据 最大的应用场景就是 我们后期做项目的时候 会调用后台接口获取数据 然后把数据填充到模板里 要保证一点 页面中已经有模板内容了 这个时候才可以向里面填充数据 这个关键的步骤 就是mounted被触发的时候 其他的钩子函数 我们用到的概率比较小
+      mounted(){
+        console.log('mounted');
+      },
+      // 有数据更新时 会调用这两个生命周期函数
+      beforeUpdate(){
+        console.log('beforeUpdate');
+      },
+      updated(){
+        console.log('updated');
+      },
+      // 销毁操作执行时 会调用这两个生命周期函数
+      beforeDestroy(){
+        console.log('beforeDestroy');
+      },
+      destroyed(){
+        console.log('destroyed');
+      }
+    });
+  </script>
+</body>
+</html>

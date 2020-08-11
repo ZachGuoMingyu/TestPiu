@@ -1,0 +1,58 @@
+// 我们举个例子
+// js是单线程语言 所以它会等待我们的延时操作结束后 才去执行下一步 
+// 这里的是输出开始 然后等待循环结束完毕后输出total 然后再输出结束
+	console.log('开始');
+	var total;
+	for(var i=0;i<1000000000000;i++){
+		total += i;
+	}
+	console.log(total);
+	console.log('结束');
+// 但是延时操作的时间可能会很长，我们有时不能让主程序去等待
+// 为了解决这种现象，H5给我们提供了WebWorker 将JS多线程去处理 将延时操作放到后台去执行
+Web Worker
+	将JS多线程去处理
+	将耗费时间长的代码放到后台去执行。
+	后台代码  a.js
+		//监听
+		onmessage = function(event){
+			//event.data 主线程给的参数 一旦监听到主线程给的参数 便立即执行
+			var total;
+			//执行延时操作
+			for(var i=0;i<event.data;i++){
+				total += i;
+			}
+			//执行完毕后发送
+			postMessage(total);
+		}
+	主线程
+		//创建worker对象
+		var worker = new Worker('a.js');
+		//使用worker去监听 后台给了主线程数据
+		worker.onmessage = function(event){
+			//数据也在event.data中
+			console.log(event.data);
+		}
+		// 主线程告诉后台 开始执行
+		worker.postMessage(10000000000);
+		// 执行我们剩下的操作
+		.....
+
+		主线程和后台线程都有监听和发送 
+		主线程使用worker去监听和发送
+		后台使用onmessage事件去监听和发送
+		执行过程：
+			在worker创建好后 后台线程创建
+			当主线程发送postMessage时 后台的onmessage监听到 然后开始执行延时操作
+			当延时操作执行完毕后 postMessage 发回数据
+			主线程的onmessage监听到数据以后 进行下一步操作
+			这样就不影响我们的主线程去执行
+
+
+
+
+
+
+
+
+

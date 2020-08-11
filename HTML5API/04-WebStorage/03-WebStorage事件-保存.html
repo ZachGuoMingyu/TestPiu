@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 创建一个输入框 用来输入保存数据 -->
+  <input type="text" id="data" placeholder="input date to save">
+  <button onClick="saveItem()">保存</button>
+  <script>
+    // 保存事件 将data保存到localStorage中
+    function saveItem() {
+      var data = document.getElementById("data").value;
+      localStorage.setItem("data", data);
+    }
+  </script>
+</body>
+</html>

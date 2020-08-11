@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas{
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="canvas" width="400px" height="400px"></canvas>
+
+  <script>
+    window.onload = function () {
+      // 获取canvas
+      var canvas = document.getElementById('canvas')
+      // 获取2d上下文
+      var context = canvas.getContext('2d')
+      // 绘制圆形
+      // 开始创建路径
+      context.beginPath()
+      // 绘制圆的路径 参数:圆心x坐标，圆心y坐标，半径，开始角度，结束角度，绘制方向(true为逆时针，false为顺时针)
+      context.arc(100, 100, 100, 0, Math.PI,true) //0, Math.PI 0到180度,当Math.PI/2 90度的时候 绘制的是弧度
+      // 关闭路径 是把终点和起点连接 如果不关闭 就是一个开放的弧度 可以演示试一下
+      context.closePath()
+      // 绘制
+      // 填充 必须填充或者是边框才能看到图形
+      // 填充颜色
+      context.fillStyle = 'coral'
+      context.fill()
+      // 边框
+      // context.stroke()
+
+      // 再绘制一个圆 可以绘制多个圆 可以把上面的路径关闭注释 把这个圆的路径开始注释 看一下效果
+      context.beginPath()
+      context.arc(300, 300, 50, 0, Math.PI*2)
+      context.closePath()
+      context.fill()
+    }
+  </script>
+</body>
+</html>

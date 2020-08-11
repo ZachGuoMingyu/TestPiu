@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas{
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="canvas" width="400px" height="400px"></canvas>
+
+  <script>
+    // 使用原生js
+    window.onload = function () {
+      // 获取画布元素
+      var canvas = document.getElementById('canvas')
+      // 获取2d上下文对象
+      var context = canvas.getContext('2d')
+      // 设置填充样式
+      context.fillStyle = 'pink'
+      // 绘制填充矩形 起始坐标x,y,宽,高
+      context.fillRect(0,0,100,200)
+
+      // 绘制边框矩形 起始坐标x,y,宽,高
+      // 设置边框线的宽度
+      context.lineWidth = 5
+      // 设置边框线的样式 绘制四个矩形拼起来的大矩形
+      context.strokeStyle = 'skyblue'
+      context.strokeRect(100, 100, 100, 100)
+
+      context.strokeStyle = 'blue'
+      context.strokeRect(205, 100, 100, 100)
+
+      context.strokeStyle = 'coral'
+      context.strokeRect(100,205,100,100)
+
+      context.strokeStyle = 'pink'
+      context.strokeRect(205, 205, 100, 100)
+ 
+      // 清除某一个区域内的矩形 clearRect(x,y,width,height)
+      context.clearRect(25,25,50,150)
+
+      // 继续清除
+      context.clearRect(175, 175, 50, 50)
+
+
+    }
+  </script>
+</body>
+</html>

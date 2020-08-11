@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    // Promise的使用
+    // 创建Promise对象 传递一个函数作为参数 函数的形参为reslove和reject
+    let promise = new Promise((resolve, reject) => {
+      // resolve和reject 是两个函数 可以改变Promise对象的状态
+      // Promise做的事情 调用resolve()函数 promise的状态就是成功 调用reject()函数 promise的状态就是失败
+      // 我们这里简答的举个例子 同步操作
+      if (3 > 5) {
+        // 如果reslove()函数调用 那么promise对象的状态就是成功的 那么我们传递一个参数出去
+        resolve('success')
+      }else{
+        // 如果reject()函数调用 那么promise对象的状态就是失败的的 
+        reject('error')
+      }
+    })
+    // 打印promise对象看一下
+    console.log(promise);
+
+    // 获取resolve和reject函数传递的数据 
+    promise.then((res) => { //then是promise对象的方法，代表promise对象成功状态的回调函数
+      // res 就是resolve传递出来的数据
+      console.log('res---', res);
+    }).catch((error) => { //catch是promise对象的方法 代表promise对象失败状态的回调函数
+      console.log('error---', error);
+    }).finally(() => { // finally是promise对象的方法 代表promise对象无论是成功还是失败都会调用的回调函数
+      console.log('一直调用');
+    })
+    // 这是一个链式调用
+
+  </script>
+</body>
+</html>

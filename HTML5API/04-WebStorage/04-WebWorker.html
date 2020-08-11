@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+      console.log('开始');
+      // console.time() 和 console.timeEnd()成对出现 用来计算中间代码执行的时间
+      console.time()
+      var total = 0
+      for(var i = 0; i<10000000000;i++){
+        total += i
+      }
+      console.log(total);
+      console.log('结束');
+      console.timeEnd()
+    */
+
+    // 直接运行会有问题 浏览器安全机制导致的，不允许在本地直接运行，它会当作跨域访问了。 右键 open with live server 在本地服务器打开
+    // 使用WebWorker处理 主线程发送和接受
+    console.time()
+    // 创建worker对象 new Worker(传入一个路径，我们js文件的路径) 
+    var worker = new Worker('04-web.js')
+    // 监听后台程序给worker的数据
+    worker.onmessage = function (event) {
+      // 后台程序给的数据 event.data
+      console.log(event.data);
+    }
+    // worker发送命令
+    worker.postMessage(100000000)
+    console.timeEnd()
+  </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 默认使用了组件 是以我们组件中设置好的样式进行展示 -->
+    <cpn></cpn>
+
+    <!-- 但是如果我希望第二次展示展示的还是这些数据 但是样式不是列表了 而是使用-进行分割显示 这个时候我们需要再去重新写一个组件吗？  -->
+
+    <!-- 如果只使用插槽 我们可以这样去显示 但是如果数据有很多我们一行一行添加就麻烦了 而且格式也不满足要求-->
+    <!-- <cpn>
+      <span>JavaScript-</span>
+      <span>JavaScript-</span>
+      <span>JavaScript-</span>
+    </cpn> -->
+
+    <!-- 有的同学会说 使用v-for遍历pLanguages不就可以了吗 但是我们目前是在vue实例中进行操作 不是在组件中进行操作 所以我们获取不到pLanguages -->
+
+    <!-- 那么这个时候只是数据展示的结构发生了改变 数据没有改变 我们可以使用作用域插槽解决这个问题 -->
+    <!-- 那怎么才能拿到子组件的pLanguages数据呢 我们需要子组件给我们传递过来 去子组件中设置 子组件设置好了以后 我们怎么用呢？ 使用使用作用域插槽-->
+
+    <!-- JavaScript - C++ - Java -->
+    <cpn>
+      <!-- 这里为什么要使用template 目的就是去子组件中拿到对应的数据 怎么拿呢？ 格式是固定的 slot-scope="slot" 当我们使用了slot-scope 它就会引用子组件中的slot插槽对象 那么 我们就可以通过slot.data拿到绑定的数据了 -->
+      <!-- <template slot-scope="slot"></template> -->
+      <!-- 在vue2.5.x template  在2.5.x以后 模板我们可以自定义 例如 使用div-->
+      <template slot-scope="slot">
+        <!-- <span v-for="item in slot.data">{{item}}</span> -->
+        <span>{{slot.data.join(' - ')}}</span>
+      </template>
+    </cpn>
+      
+    <cpn>
+      <!-- <template slot-scope="slot"></template> -->
+      <!-- 在vue2.5.x template  在2.5.x以后 模板我们可以自定义 例如 使用div-->
+      <template slot-scope="slot">
+        <!-- <span v-for="item in slot.data">{{item}}</span> -->
+        <span>{{slot.data.join(' * ')}}</span>
+      </template>
+    </cpn>
+
+  </div>
+
+  <template id="cpn">
+    <div>
+      <!-- 这个名字是可以自定义的 -->
+      <!-- 之前在这里 我们使用的是具名插槽 但是我们在这里使用动态数据绑定一个data(data的名字可以随便取) 我们可以把pLanguages赋值给data  那么此时的data就是pLanguages-->
+      <slot :data1="pLanguages">
+        <ul>
+          <li v-for="item in pLanguages">{{item}}</li>
+        </ul>
+      </slot>
+    </div>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {},
+      components: {
+        cpn: {
+          template: '#cpn',
+          data() {
+            return {
+              pLanguages: ['JavaScript','C++','Java','Go','Python','Swift','C#']
+            }
+          },
+        }
+      }
+  })
+  </script>
+</body>
+</html>

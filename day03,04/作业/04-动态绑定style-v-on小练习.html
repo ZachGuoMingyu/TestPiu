@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .d1 {
+      width: 200px;
+      height: 200px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 点击按钮 将矩形div变换成按钮标题相对应的颜色 -->
+  <div id="change_color">
+    <button @click="f1">红色</button>
+    <button @click="f2">黄色</button>
+    <button @click="f3">蓝色</button>
+    <div class="d1" :style="{backgroundColor:bgc}"></div>
+  </div>
+  </body>
+  <script src="./js/vue.js"></script>
+  <script>
+    var app = new Vue({
+      el: '#change_color',
+      data: {
+        bgc: 'red'
+      },
+      methods: {
+        f1(){
+          this.bgc = 'red'
+        },
+        f2(){
+          this.bgc = 'yellow'
+        },
+        f3(){
+          this.bgc = 'blue'
+        }
+      }
+    })
+
+  </script>
+</body>
+</html>

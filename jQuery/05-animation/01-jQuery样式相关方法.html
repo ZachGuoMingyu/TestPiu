@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #element {
+      margin: 5px;
+      padding: 10px;
+      width: 100px;
+      height: 100px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="element"></div>
+  <!-- 
+    height():其高度范围是所匹配元素的高度height
+    innerHeight():其高度范围是所匹配元素的高度height+padding
+    outerHeight():其高度范围是所匹配元素的高度height+padding+border
+    outerHeight(true)其高度范围是所匹配元素的高度height+padding+border+margin
+   -->
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  <script>
+    $(function () {
+      // .height() 高度height
+      console.log($('#element').height());
+
+      // .width() 宽度width
+      console.log($('#element').width());
+
+      // .innerHeight() height+padding
+      console.log($('#element').innerHeight());
+
+      // .innerWidth() width+padding
+      console.log($('#element').innerWidth());
+
+      // .outerHeight() height+padding+border
+      console.log($('#element').outerHeight());
+
+      // 如果传参为true outerHeight(true) height+padding+border+margin
+      console.log($('#element').outerHeight(true));
+
+      // .outerWidth() width+padding+border
+      console.log($('#element').outerWidth());
+
+      // 如果传参为true outerWidth(true) width+padding+border+margin
+      console.log($('#element').outerWidth(true));
+
+      // offset()
+      console.log($('#element').offset());
+
+      // .position()
+      console.log($('#element').position());
+    })
+  </script>
+</body>
+
+</html>

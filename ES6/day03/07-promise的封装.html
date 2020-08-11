@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script>
+    // 封装promise对象 方便异步操作 形参url method data 成功失败回调交给promise去做
+    function send(url, method, data) {
+      // return 一个Promise对象 因为我们执行这个封装的方法时最后需要拿到的是Promise对象
+      return new Promise((resolve, reject) => {
+        // 1.发送ajax请求
+        $.ajax({
+          // 使用对象的简写
+          url,
+          method,
+          data,
+          success(res){
+            resolve(res)
+          },
+          error(err){
+            reject(err)
+          }
+        })
+      })
+    }
+
+    // 调用我们封装好的promise对象
+    // send('http://47.106.244.1:8099/manager/category/findAllCategory', 'get', {})
+    // .then((response) => {
+    //   console.log(response);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // })
+
+    // 再获取一个其他接口数据 文章接口
+    // send('http://47.106.244.1:8099/manager/article/findArticle', 'get', {page:0,pageSize:10})
+    // .then((response) => {
+    //   console.log(response);
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // })
+
+    // 我们还可以这样使用
+    // 生成两个promise对象 p1 p2 把上面的函数调用赋值给这两个对象
+    let p1 = send('http://47.106.244.1:8099/manager/category/findAllCategory', 'get', {})
+    let p2 = send('http://47.106.244.1:8099/manager/article/findArticle', 'get', { page: 0, pageSize: 10 })
+
+    // 让p1 p2同时发送请求
+    // 合并p1 p2的结果 两个请求都完毕后 一起将数据返回给p3
+    // Promise.all 等待多个异步执行成功之后再做操作
+    // let p3 = Promise.all([p1, p2])
+    // p3.then((response) => {
+    //   console.log(response);
+    // }).catch((error) => {
+    //   console.log(error);
+    // })
+
+    // 只要p1、p2的状态都变成fulfilled，p3的状态才会变成fulfilled，此时p1、p2的返回值组成一个数组，传递给p3的回调函数。
+    // 只要p1、p2之中有一个被rejected，p3的状态就变成rejected，此时第一个被reject的实例的返回值，会传递给p3的回调函数。
+
+
+    // Promise.race 比赛 谁加载的快就用谁的结果
+    let p3 = Promise.race([p1, p2])
+    p3.then((response) => {
+      console.log(response);
+    }).catch((error) => {
+      console.log(error);
+    })
+
+    // 只要p1、p2之中有一个实例率先改变状态，p3的状态就跟着改变 成功 p3就成功 失败 p3就失败
+
+
+  </script>
+</body>
+
+</html>

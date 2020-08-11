@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 1.checkbox单选框 -->
+    <!-- 这里面我们实现一个需求 当用户选中同意时 下一步按钮可以点击 当不选择同意的时候 下一步不可以点击 -->
+    <!-- <label for="agree">
+      <input type="checkbox" id="agree" v-model="isAgree">同意
+    </label>
+    <h2>您选择的是: {{isAgree}}</h2>
+    <button :disabled="!isAgree">下一步</button> -->
+    
+    <!-- 2.checkbox多个复选框 -->
+    <!-- <input type="checkbox" value="篮球" v-model="hobbies">篮球
+    <input type="checkbox" value="足球" v-model="hobbies">足球
+    <input type="checkbox" value="乒乓球" v-model="hobbies">乒乓球
+    <input type="checkbox" value="羽毛球" v-model="hobbies">羽毛球
+    <h2>您的爱好是：{{hobbies}}</h2> -->
+
+    <!-- 另一种方法实现我们的v-model与checkbox复选框的双向绑定 -->
+    <!-- 这里我们使用动态绑定value，for和id -->
+    <!-- value也使用了动态绑定 是每循环一次 给当前的input设置一个value 如果我们不使用动态绑定 那么就会把item当做一个值赋给value 也就是每一个选项的value都是item 动态绑定以后 每一个value就是当前选项的值 -->
+    <label v-for="item in orHobbies" :for="item">
+      <input type="checkbox" :value="item" :id="item" v-model="hobbies">{{item}}
+    </label>
+
+    <h2>您的爱好是：{{hobbies}}</h2>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        isAgree: false, //单选框
+        hobbies:[], //多选框
+        orHobbies:['篮球','足球','乒乓球','羽毛球','排球','台球']
+      },
+  })
+  </script>
+</body>
+</html>

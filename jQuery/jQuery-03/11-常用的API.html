@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text" value="zhangsan">
+  <input type="text" value="lisi">
+  <div>
+    <span>one</span>
+  </div>
+  <div>
+    <span>two</span>
+  </div>
+  <div>
+    <span>three</span>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  <script>
+    $(function () {
+      // html()
+      // 如果$('div')选中了多个元素，那么使用html()获取内部的内容，拿到的是第一个的
+      // console.log($('div').html());
+
+      // text()
+      // 如果$('div')选中了多个元素，那么使用text()获取内部的文本，拿到的是所有元素的文本
+      // console.log($('div').text());
+
+      // 设置内部内容 使用html()设置内部内容 会把选中的元素全部替换掉 替换的是元素 打开控制台看一下
+      // $('div').html('<h2>hello</h2>')
+
+      // 设置内部文本 会把之前div内部的span去掉 直接替换一个字符串 text()不能识别html元素
+      // $('div').text('hello')
+
+      // val() 用来获取value的值 多个元素 只能获取到第一个value
+      // console.log($('input').val());
+
+      // val() 设置值
+      // $('input').val('hello')
+
+      // 获取每一个选中元素的html()
+      $('div').html(function (index, item) {
+        // index 索引
+        // item 值
+        // console.log(index, item);
+      })
+      // 也可以遍历获取
+      $('div').each(function (index, item) {
+        // index 索引
+        // item 每一个dom节点
+        // console.log(index, item);
+        // 打印每一个dom的HTML
+        // console.log($(item).html());
+      })
+    })
+    
+  </script>
+</body>
+</html>

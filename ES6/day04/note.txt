@@ -1,0 +1,148 @@
+学习目标
+  1.babel转换ES6-ES5
+  2.模块
+  3.class
+  4.模板字符串
+  5.Symbol
+  
+
+
+NodeJS和浏览器并不能认识所有的ES6的新特性，虽然js版本进行了更新，但是可能现有环境并不支持其部分新特性，为了解决这种问题，
+
+  我们可以使用babel插件将ES6转成ES5的代码
+  安装babel插件/第三方包/依赖，使用NodeJS软件自带npm包管理工具(可以下载我们所需要的插件/第三方包/依赖)。
+    全局安装，安装到全局，在任何目录下都可以使用你安装的这个插件
+    项目安装，安装到当前项目的文件夹内，只能在项目目录内使用
+  包管理工具 ppt 17页
+    npm     国外nodejs.org服务器，慢 
+    cnpm    国内淘宝服务器镜像            npm和cnpm有时候都会出问题 可以结合使用
+      使用npm安装cnpm
+      npm install -g cnpm --registry=https://registry.npm.taobao.org
+      查看是否安装成功  cnpm -v
+    yarn
+  比如在企业级开发中要用jQuery，并不会像我们之前一样引入jQuery，而是使用包管理工具安装第三方包jQuery
+    cd day04 进入对应目录 
+    cnpm install jquery 局部安装jQuery
+    cnpm install echarts
+      在day04下安装了jquery包，局部安装，node_modules目录下
+    cnpm install -g jquery 加了-g 是全局安装
+      无论在哪个目录下执行这个安装的代码，都是全局安装，在任何目录下都可以使用
+     
+  项目开发思想
+    工具全局安装(npm,cnpm,yarn等 确保每个目录下都可以使用)
+    项目依赖局部安装
+
+    初始化一个项目 (在当前文件夹下新建一个文件夹app，根据下面步骤来走)
+
+      npm init
+        package name: (app) 项目名称/包名
+        version: (1.0.0)    版本号
+        description:        描述
+        entry point: (index.js)  入口js文件
+        test command:       测试命令
+        git repository:     git仓库
+        keywords:           关键词 根据关键词可以搜索到你的项目
+        author:             作者
+        license: (ISC)      证书
+      经过一些创建过程，最终产生一个package.json文件，项目配置文件
+      还可以使用
+      npm init -y 默认初始化，快速初始化项目 上面问题会全部默认
+
+    项目初始化之后，我们安装项目所需的依赖
+
+
+  全局安装babel-cli （全局和局部都需要安装）
+      cnpm install -g babel-cli
+  局部安装依赖
+    cnpm install --save babel-cli  产品依赖，项目上线后依然需要的插件
+    cnpm install --save-dev babel-cli 生产依赖，项目开发阶段需要的插件
+
+    去ppt 22页
+
+    安装babel我们使用ES6-ES5升级版 PPT 25页 根据这个步骤去安装
+
+    安装完上面的局部依赖 还需安装这个 cnpm install --save-dev babel-preset-latest
+
+    安装完了以后发现我的文件夹下没有node_modules 因为我把它隐藏掉了 不让vscode检索它内部文件
+    node_modules 在VScode中隐藏。不让vscode检索node_modules内部的文件。在vscode设置中找到exclude，添加模式**/node_modules
+
+    新建.babelrc文件 在里面加入配置{"presets": ["latest"]} 全用双引号
+
+    配置完.babelrc文件后  在app下新建src文件夹 新建a.js文件 里面写个let a = 1 const PI = 3.14把这个文件转换一下
+      
+      
+    如果有同学有问题 使用不了babel命令 那么就全局安装一下
+    
+
+    使用babel
+      babel src/a.js
+      babel src/a.js --out-file dist/a.js 建好文件夹再用
+
+      再新建一个b.js文件 里面写个箭头函数，当有多个js文件需要转换的时候 我们使用
+      babel src --out-dir dist
+
+      可以之后我们把dist文件里的js文件全部删掉 使用项目级的方式去转换 看PPT最后两步
+      5.在package.json中编写脚本，执行转换 'build':'babel src --out-dir dist'
+      6.执行脚本
+      cnpm run build 执行这个指令和我们执行上面的指令一样 
+
+      下载项目依赖
+      当我们需要把项目上传到github或给其他同学拷贝的时候 我们不需要连带node_modules一起传递 
+      拿到项目后 我们在项目中执行cnpm/npm install即可 会根据package.json中的配置生成node_modules
+
+
+  模块 
+  模块体系就类似与我们玩乐高 我们可以通过一块一块小零件组成不同的整体
+    一个js文件就是一个模块
+      导入 import 
+      导出 export    export default
+
+    m1.js 比m1里有一些内容我想要导出 那么就使用 export
+    m2.js 在m2里我想要导入m1导出的功能，那么久使用import
+
+    因为nodejs不支持es6的模块化功能 所以我们需要使用babel来进行转换
+
+  class
+    以前创建对象
+      工厂模式
+      构造函数模式
+      原型模式
+      组合模式
+
+      new Person();创建对象
+
+      class  类 创建某一个类型的对象 语法糖
+
+      我们回顾一下类的使用
+
+      class Person{
+        constructor(name,age,gender){
+          //实例属性
+          this.name = name;
+          this.age = age;
+          this.gender = gender;
+        }
+        //实例方法
+        sayName(){}
+        sayHi(){}
+        //静态方法  只能类本身访问
+        static say(){}
+        static say2(){}
+        static say3(){}
+      }
+      //静态属性
+      Person.test = 'hello';
+
+      new Person('zhangsan',12,'男');
+
+    继承 在之前是不是很麻烦
+      原型链继承 子构造函数的原型对象 = 父构造函数的实例 实现了原型链的继承 dog.prototype = new Animal()
+      经典继承   在子构造函数内调用父构造函数 Animal.call(this,name);
+      组合继承 原型链+经典继承
+
+      es6中的继承我们使用 extends关键字  
+
+      super关键字
+  
+
+

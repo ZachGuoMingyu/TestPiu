@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>插入节点</button>
+  <ul>
+    <li>我是第1个li</li>
+    <li>我是第2个li</li>
+    <li>我是第3个li</li>
+  </ul>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  <script>
+    $(function () {
+      // 编写jQuery代码
+      $('button').click(function () {
+        // 1.创建一个节点
+        var $li = $("<li>新增的li</li>")
+        // 2.添加节点 
+        // 内部插入
+        // append 会将元素添加到指定元素内部的最后 $('ul').append($li)
+        // $('ul').append($li)
+
+        // appendTo 与append作用一样 参数位置不同 $li.appendTo('ul')
+        // $li.appendTo('ul')
+
+        // prepend 会将元素添加到指定元素内部的最前面 $li.appendTo('ul')
+        // $('ul').prepend($li)
+
+        // prependTo 与prepend作用一样 参数位置不同 $li.prependTo('ul')
+        // $li.prependTo('ul')
+
+        // 外部插入
+        // after 会将元素添加到指定元素外部的后面 $('ul').after($li)
+        // $('ul').after($li)
+
+        // insertAfter 与after作用一样 参数位置不同 $li.insertAfter('ul')
+        // $li.insertAfter('ul')
+
+        // before 会将元素添加到指定元素外部的前面 $('ul').before($li)
+        // $('ul').before($li)
+
+        // insertBefore 与before作用一样 参数位置不同 $li.insertBefore('ul')
+        $li.insertBefore('ul')
+      })
+    })
+    
+  </script>
+</body>
+</html>

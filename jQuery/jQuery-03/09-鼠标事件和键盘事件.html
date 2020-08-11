@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>点我啊</button><br>
+  输入一些东西: <input type="text" />
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  <script>
+    $(function () {
+      // dblclick 鼠标双击事件
+      $('button').dblclick(function () {
+        alert('dblclick')
+      })
+
+      // hover 鼠标悬停
+      $('button').hover(function () {
+        console.log('鼠标悬停');
+      })
+
+      // 鼠标移入
+      $('button').mouseenter(function () {
+        $(this).css({
+          background:'red'
+        })
+      })
+      // 鼠标移出
+      $('button').mouseleave(function () {
+        $(this).css({
+          background: 'white'
+        })
+      })
+      // 其他的鼠标事件大家自己去测试一下
+
+      // keydown 按键按下事件
+      $("input").keydown(function () {
+        $("input").css("background-color", "red");
+        console.log("keydown");
+      });
+      // keyup 按键抬起事件
+      $("input").keyup(function () {
+        $("input").css("background-color", "yellow");
+        console.log("keyup");
+      });
+    })
+
+  </script>
+</body>
+</html>

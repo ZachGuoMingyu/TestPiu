@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <cpn></cpn>
+    <cpn></cpn>
+    <!-- 使用$refs之前 要给对应的子组件设置ref -->
+    <cpn ref="child"></cpn>
+    <button @click="btnClick">获取子组件的信息</button>
+  </div>
+
+  <template id="cpn">
+    <div>
+      <div>我是子组件</div>
+    </div>
+  </template>
+
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {},
+      methods: {
+        btnClick(){
+          // 1.$children
+          // console.log(this.$children); //this.$children是一个数组类型，它包含所有子组件对象。
+          // for(let child of this.$children){
+          //   console.log(child.name);
+          // }
+          // 拿到组件中第三个组件的name 然后去看ppt 分析$children的缺陷
+          // console.log(this.$children[2].name);
+
+          // 2.$refs => 对象类型 默认是一个空的对象
+          // console.log(this.$refs.child.name);
+        }
+      },
+      components: {
+        cpn: {
+          template: '#cpn',
+          data() {
+            return {
+              name: '我是子组件的name'
+            }
+          },
+        }
+      }
+  })
+  </script>
+</body>
+</html>

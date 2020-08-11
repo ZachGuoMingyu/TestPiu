@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>hello1</div>
+  <div>hello2</div>
+  <div>hello3</div>
+  <div>hello4</div>
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  <script>
+    $(function () {
+      //使用get() get()无参 将jQuery对象转成数组 
+      var arr = $('div').get()
+      console.log(arr)
+
+      // toArray() 将jQuery对象转成数组 
+      arr = $('div').toArray()
+      console.log('toArray', arr)
+
+      // get()有参 获取指定索引上的元素 返回DOM节点
+      var temp = $('div').get(1)
+      console.log(temp);
+
+      // eq() 返回jQuery对象
+      console.log($('div').eq(1))
+
+      // 过滤 过滤出div文本后缀大于2的元素
+      var $result = $('div').filter(function (index, item) {
+        // item DOM节点
+        // console.log(item);
+        // 获取内部文本
+        var text = $(item).text()
+        // 截取字符串最后一位
+        text = text.slice(text.length - 1)
+        return text > 2
+      })
+      console.log('result', $result);
+
+      // first() 获取匹配元素集合中第一个元素 与之前学的选择器:first 类似
+      console.log($('div').first())
+      console.log($('div:first'))
+
+      // 其余的大家自己下去试一下。。。
+    })
+    
+  </script>
+</body>
+</html>

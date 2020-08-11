@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 前端开发登录逻辑 使用JWT token验证 -->
+  <!-- JWT 英文名是 Json Web Token ，是一种用于通信双方之间传递安全信息的简洁的、URL安全的表述性声明规范，经常用在跨域身份验证。 -->
+  <!-- 正常情况下，我们第一步都是用户名和密码登录，用户名密码正确，后台会返回给我们数据，其中就包含token等唯一标识的数据。 之后，我们每次去访问后台接口的时候，都要携带这个token给接口，后台校验token 正确 获取数据 错误 拿不到数据 -->
+
+  <!-- 我们需要做的是 登录以后 拿到token或其他唯一标识 将它保存起来 在以后的请求中直接把token取出来用就可以 保存在哪？ 保存在sessionStorage(单页面)和localStorage(多页面)中 -->
+
+  <script>
+    // console.log(sessionStorage);
+    // console.log(localStorage);
+    // 存储数据 sessionStorage
+    // 放字符串
+    sessionStorage.setItem('name','zhangsan')
+    sessionStorage.setItem('age',12)
+    // 放对象
+    // sessionStorage.setItem('obj',{name: 'lisi',age:12})
+    // 我们通过JSON.stringfy转换一下
+    sessionStorage.setItem('obj',JSON.stringify({ name: 'lisi', age: 12 }))
+
+    // 获取数据
+    // 通过getItem(key) 拿到value
+    var age = sessionStorage.getItem('age')
+    console.log(age);
+    var obj = sessionStorage.getItem('obj')
+    // 取出来以后再转换成对象 JSON.parse
+    console.log(JSON.parse(obj));
+
+    // 删除由name指定的键值对
+    // sessionStorage.removeItem('name')
+
+    // 删除所有值 clear() 一般用在我们点击退出按钮后 将我们保存在sessionStorage中的所有信息全部清空 防止缓存影响其他用户的操作
+    // sessionStorage.clear()
+
+    // 获得index位置处的key
+    // console.log(sessionStorage.key(1));
+
+    // Storage对象中，键值对的数量
+    console.log(sessionStorage.length);
+
+    // 讲到local再回来
+    // 获取localStorage中的数据
+    console.log(localStorage.getItem('address'));
+  </script>
+</body>
+</html>

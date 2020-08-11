@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 怎么让它转起来呢 使用动画 */
+    /* 我们给画布设置动画 */
+    canvas{
+      /* 动画名称 */
+      animation-name: rotateAnimation;
+      /* 动画时长 */
+      animation-duration: 2s;
+      /* 循环次数 */
+      animation-iteration-count: infinite;
+      /* 动画速度 */
+      animation-timing-function: linear;
+    }
+    @keyframes rotateAnimation {
+      0%{
+        transform: rotate(0deg);
+      }
+      100%{
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="400px" height="400px"></canvas>
+
+  <script>
+    window.onload = function () {
+      // 获取canvas
+      var canvas = document.getElementById('canvas')
+      // 获取2d上下文
+      var context = canvas.getContext('2d')
+      // 绘制两个半圆
+
+      // 左边半圆
+      // 开始创建路径
+      context.beginPath()
+      // 绘制圆的路径 参数:圆心x坐标，圆心y坐标，半径，开始角度，结束角度，绘制方向(true为逆时针，false为顺时针)
+      context.arc(200, 200, 200, Math.PI/2, Math.PI*3/2) //0, Math.PI 0到180度,当Math.PI/2 90度的时候 绘制的是弧度
+      // 关闭路径 
+      context.closePath()
+      // 填充半圆区域
+      context.fillStyle = 'coral'
+      context.fill()
+
+      // 右边半圆
+      context.beginPath()
+      // 右半圆和左半圆弧度不一样 右边是从270到90度
+      context.arc(200, 200, 200, Math.PI * 3 / 2,Math.PI / 2) 
+      context.closePath()
+      context.fillStyle = '#000'
+      context.fill()
+
+      // 绘制上面的中圆
+      context.beginPath()
+      // 右半圆和左半圆弧度不一样 右边是从270到90度
+      context.arc(200, 100, 100, 0, Math.PI * 2)
+      context.closePath()
+      // 填充颜色和左半圆一样
+      context.fillStyle = 'coral'
+      context.fill()
+
+      // 绘制下面的中圆
+      context.beginPath()
+      context.arc(200, 300, 100, 0, Math.PI * 2)
+      context.closePath()
+      // 填充颜色和右半圆一样
+      context.fillStyle = '#000'
+      context.fill()
+
+      // 绘制上面的小圆
+      context.beginPath()
+      context.arc(200, 100, 30, 0, Math.PI * 2)
+      context.closePath()
+      // 填充颜色和右半圆一样
+      context.fillStyle = '#000'
+      context.fill()
+
+      // 绘制下面的小圆
+      context.beginPath()
+      context.arc(200, 300, 30, 0, Math.PI * 2)
+      context.closePath()
+      // 填充颜色和右半圆一样
+      context.fillStyle = 'coral'
+      context.fill()
+    }
+  </script>
+</body>
+</html>

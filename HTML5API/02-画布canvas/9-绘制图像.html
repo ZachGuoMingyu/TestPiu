@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="canvas" width="400px" height="400px"></canvas>
+
+  <script>
+    window.onload = function () {
+      // 获取canvas
+      var canvas = document.getElementById('canvas')
+      // 获取2d上下文
+      var context = canvas.getContext('2d')
+      // 绘制图像
+      // 创建图像节点
+      var image = new Image()
+      // 设置图片
+      image.src = './dog.jpeg'
+      // 监听图像是否加载完毕 完毕后再绘制
+      image.onload = function () {
+        // 绘制图像 context.drawImage(image,x,y,w,h); 参数：图像对象，绘制位置的起始x坐标，起始y坐标,绘制图像的宽，高
+        context.drawImage(image, 0, 0, 100, 100)
+
+        // 图像平铺
+        // var pattern = context.createPattern(image, 'repeat-x');
+        // context.fillStyle = pattern;
+        // context.fillRect(0, 0, 400, 400);
+      }
+
+      // 图像裁剪
+      context.beginPath()
+      context.arc(50,50,50,0,Math.PI*2)
+      context.closePath()
+      // 裁切 只有在裁切范围内的才能显示出来
+      context.clip()
+
+    }
+  </script>
+</body>
+
+</html>

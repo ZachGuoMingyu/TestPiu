@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas{
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="canvas" width="400px" height="400px"></canvas>
+
+  <script>
+    window.onload = function () {
+      // 获取canvas
+      var canvas = document.getElementById('canvas')
+      // 获取2d上下文
+      var context = canvas.getContext('2d')
+      // 打开路径
+      context.beginPath()
+      // 直线的起点
+      context.moveTo(0,0)
+      // 直线的终点
+      context.lineTo(100,100)
+      // 闭合路径
+      context.closePath()
+      // 设置边框颜色
+      context.strokeStyle = 'coral'
+      // 设置边框宽度
+      context.lineWidth = 4
+      // 绘制路径到画布上
+      context.stroke()
+    }
+  </script>
+</body>
+</html>

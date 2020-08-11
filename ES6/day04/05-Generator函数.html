@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 生成器其实就是一个特殊的函数
+    // 作用：异步编程 
+    function * gen() {
+      console.log('hello generator');
+    }
+    // 我们来接收一下它执行的结果
+    let result = gen();
+    // 根据结果我们可以看出 它里面有next方法 它其实是一个迭代器对象
+    console.log(result);
+    // 我们可以使用迭代器的方法
+    result.next() //可以输出hello generator
+
+    // 我们在使用另一种形式来声明一个生成器
+    // yield 函数代码的分隔符 在当前这里面 会分成四个片段来执行
+    function * gen2() {
+      // console.log(111);
+      yield '一直没有耳朵'
+      // console.log(222);
+      yield '一直没有尾巴'
+      // console.log(333);
+      yield '真奇怪'
+      // console.log(444);
+    }
+
+    // 我们调用next方法来执行
+    // let a = gen2()
+    // a.next()
+    // a.next()
+    // a.next()
+    // a.next()
+
+    // 生成器代码的之前 并不像之前的代码一样 从上到下依次执行完毕 而是通过next()方法 一段一段的执行
+
+    // 因为它是一个迭代器对象 我们可以使用for..of 来遍历它
+    for (let v of gen2()) {
+      console.log(v);
+    }
+
+    // 那我们把之前的next()执行的结果做一个输出
+    let a = gen2()
+    console.log(a.next());
+    console.log(a.next());
+    console.log(a.next());
+    console.log(a.next());
+    // 我们根据结果可以看出来 我们每执行一次next() 都会输出一次yield结果 最后一次没有yield了 所以为undefined
+  </script>
+</body>
+</html>

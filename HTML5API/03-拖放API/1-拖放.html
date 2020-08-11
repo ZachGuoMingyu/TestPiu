@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .parent{
+      height: 200px;
+      border: 1px solid red;
+    }
+    .child{
+      width: 100px;
+      height: 100px;
+      border: 1px solid blue;
+    }
+  </style>
+</head>
+<body>
+  <div class="parent"></div>
+  <!-- draggable="true" 可以拖放 -->
+  <div draggable="true" class="child" id="one">我是一个div</div>
+  <script>
+    window.onload = function () {
+      // 获取parent DOM节点 目标元素
+      var parent = document.getElementsByClassName('parent')[0]
+      // 获取child DOM节点 拖放元素
+      var child = document.getElementsByClassName('child')[0]
+
+      // 拖放事件
+      // 拖放开始事件 绑定给拖放元素 开始拖放时，记录拖放的元素并保存起来，在放置的时候获取到拖放元素，放置到目标元素内部 那么拖放的元素保存在哪? 保存到数据传输对象dataTransfer中
+      child.ondragstart = function (event) {
+        console.log('ondragstart')
+        // 拖放数据传输对象
+        var dt = event.dataTransfer
+        // 添加数据到数据传输对象里 dataTransfer.setData(key,val);在dataTransfer中设置值,在dragstart赋值, 给a标签设置一个id one 将id保存起来
+        // this.id就是获取到自己的id one
+        dt.setData('id', this.id)
+        // 保存完毕后 在parent.ondrop进行获取使用
+      }
+
+      // 拖放事件
+      child.ondrag = function () {
+        console.log('ondrag');
+      }
+
+      // 拖放结束事件
+      child.ondragend = function () {
+        console.log('ondragend');
+      }
+
+      // 放置事件
+      // 进入目标事件 绑定给目标元素
+      parent.ondragenter = function () {
+        console.log('ondragenter');
+      }
+
+      // 在目标元素内移动
+      parent.ondragover = function (event) {
+        console.log('ondragover');
+        // 设置目标元素可放置
+        event.preventDefault(); 
+      }
+
+      // 将拖放元素放置到目标元素内时触发
+      parent.ondrop = function (event) {
+        console.log('ondrop');
+        // 获取开始拖放时保存的id值
+        // 拖放数据传输对象
+        var dt = event.dataTransfer
+        // 通过getData获取到id
+        var id = dt.getData('id')
+        // 通过id获取DOM节点
+        var dom = document.getElementById(id)
+        // 追加到parent元素内部 我们发现拖放不成功 那么来到parent.ondragover里 设置目标元素可放置
+        this.appendChild(dom)
+      }
+    }
+  </script>
+</body>
+</html>

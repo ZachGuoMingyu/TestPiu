@@ -1,0 +1,21 @@
+table{
+    border: 1px solid rgb(233, 233, 233);
+    /* 表示表格的两边框合为一条 */
+    border-collapse: collapse;
+    /* 单元格边框之间的距离 */
+    border-spacing: 0;
+  }
+  th, td{
+    /* 上下内边距20px 左右内边距20px */
+    padding: 10px 20px;
+    border: 1px solid rgb(233, 233, 233);
+    text-align: center;
+  }
+  th{
+    background-color: rgb(247, 247, 247);
+    /* 字体颜色 */
+    color: rgb(93, 107, 119);
+  }
+  h2{
+      padding-left: 450px;
+  }

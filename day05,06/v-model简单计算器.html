@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <!-- 简单计算器 -->
+  <div id="app">
+    <!-- v-model加修饰符.number -->
+    <input type="text" v-model.number="n1" />
+    <select name="jisuanqi" v-model="rule">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input type="text" v-model.number="n2" />
+    <input type="button" value="=" @click="res" />
+    <input type="text" v-model="n3" />
+  </div>
+  <script src="./js/vue.js"></script>
+  <script>
+    var vm1 = new Vue({
+      el: "#app",
+      data: {
+        n1: '',
+        n2: '',
+        n3: '',
+        rule: '+'
+      },
+      methods: {
+        res() {
+          console.log(this.rule);
+          switch (this.rule) {
+            case '+':
+              this.n3 = this.n1 + this.n2;
+              break;
+            case '-':
+              this.n3 = this.n1 - this.n2;
+              break;
+            case '*':
+              this.n3 = this.n1 * this.n2;
+              break;
+            case '/':
+              this.n3 = this.n1 / this.n2;
+              break;
+            default:
+              break;
+          }
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

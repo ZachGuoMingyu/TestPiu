@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- v-on:click  -->
+    <!-- @click不传递参数，但是下面的点击方法还有一个形参，浏览器会默认给我们传递一个event事件对象 -->
+    <!-- 这里的changeTotal省略了参数的传递 它会默认的把我们在$emit中定义的参数传递过去 this.$emit('increment', this.counter) -->
+    <!-- 我们通过v-on:来监听子组件发射的事件 @increment 的名字一定要和下面我们设置的名字保持一致 -->
+    <child-cpn @increment="changeTotal" @decrement="changeTotal"></child-cpn>
+    <!-- 将子组件的counter传递给父组件的total并且显示 -->
+    <h2>计数器：{{total}}</h2>
+  </div>
+  <template id="childCpn">
+    <div>
+      <button @click="increment">+1</button>
+      <button @click="decrement">-1</button>
+    </div>
+  </template>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        total: 0
+      },
+      methods: {
+        changeTotal(counter){
+          // console.log('changeTotal', counter);
+          this.total = counter
+        }
+      },
+      components: {
+        'child-cpn': {
+          template: '#childCpn',
+          data() {
+            return {
+              counter: 0
+            }
+          },
+          methods: {
+            increment(){
+              this.counter++
+              // $emit两个参数 第一个参数：自定义事件的名称    第二个参数：要传递过去的数据
+              this.$emit('increment', this.counter)
+            },
+            decrement(){
+              this.counter--
+              this.$emit('decrement', this.counter)
+            }
+          },
+        }
+      }
+  })
+  </script>
+</body>
+</html>

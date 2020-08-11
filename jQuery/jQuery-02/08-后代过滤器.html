@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>后代过滤器</title>
+	<style>
+		.outer{
+			border:1px solid blue;
+			overflow: hidden;
+			float: left;
+			margin:10px;
+		}
+		.inner{
+			border:1px solid red;
+			width: 50px;
+			height: 50px;
+			float: left;
+			margin:10px;
+		}
+	</style>
+	
+</head>
+<body>
+	<div class="outer">
+		<div class="inner"></div>
+		<div class="inner"></div>
+		<div class="inner"></div>
+		<div class="inner"></div>
+		<div class="inner"></div>
+	</div>
+	<div class="outer">
+		<div class="inner"></div>
+		<div class="inner"></div>
+		<div class="inner"></div>
+		<div class="inner"></div>
+		<div class="inner"></div>
+	</div>
+	<div class="outer">
+		<div class="inner"></div>
+		<div class="inner"></div>
+		<div class="inner"></div>
+	</div>
+	<script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+	<script>
+		$(function () {
+			// 选中每一个outer中的第一个inner,选出来3个
+			// :first-child可以有多个，作为别人的第一个孩子的
+			// var $result = $('.outer .inner:first-child');
+			// $result.css('background', 'red');
+
+			// :last-child可以有多个，作为别人的最后一个孩子
+			// var $result = $('.outer .inner:last-child');
+			// $result.css('background', 'red');
+
+			// :first只有一个元素，第一个
+			// var $result = $('.outer .inner:first');
+			// $result.css('background', 'red');
+
+			// last同理
+			// var $result = $('.outer .inner:last');
+			// $result.css('background', 'red');
+
+			// 作为别人的第偶数个孩子的，从1开始
+			var $result = $('.outer .inner:nth-child(even)');
+			$result.css('background', 'red');
+		});
+	</script>
+</body>
+</html>

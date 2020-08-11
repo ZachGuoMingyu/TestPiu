@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  <script>
+    
+    $.getJSON('https://api.apiopen.top/musicRankings', {}, function (res) {
+      console.log('快捷函数$.getJSON', res);
+    }).done(function () { //表示ajax调用成功
+      console.log('done');
+    }).fail(function () { //表示ajax调用错误
+      console.log('fail');
+    }).always(function () { //表示ajax完成，无论是成功或错误
+      console.log('always');
+    });
+
+    // ajax全局方法
+    $(document).ajaxComplete(function () {
+      console.log('ajax请求完毕');
+    })
+
+  </script>
+  
+</body>
+</html>

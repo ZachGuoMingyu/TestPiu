@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="canvas" width="400px" height="400px"></canvas>
+
+  <script>
+    window.onload = function () {
+      // 获取canvas
+      var canvas = document.getElementById('canvas')
+      // 获取2d上下文
+      var context = canvas.getContext('2d')
+      // 打开路径
+      context.beginPath()
+      // 绘制bezier曲线
+      // bezier曲线起点
+      context.moveTo(0, 0)
+      // bezier曲线 以(c1x, c1y)和(c2x, c2y)为控制点，曲线会圆滑的靠近这两个控制点,终点 到(x,y)为止
+      context.bezierCurveTo(0, 100, 100, 400, 400, 400)
+
+      // 绘制quadratic曲线
+      // quadratic曲线起点
+      context.moveTo(0, 0)
+      // quadratic曲线终点 从上一点开始绘制一条二次贝塞尔曲线，到(x,y)为止，并且以(cx,cy作为控制点)
+      context.quadraticCurveTo(400, 0, 400, 400)
+
+      // 绘制路径
+      context.stroke()
+    }
+  </script>
+</body>
+
+</html>

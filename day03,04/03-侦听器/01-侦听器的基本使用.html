@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 侦听器是用来监听data中的数据的变化 如果数据发生变化 就会触发侦听器所绑定的方法 在方法里可以做一些特定的业务需求-->
+  <!-- 使用层面和计算属性有相似的地方，只不过是使用watch属性 watch中也可以定义一系列的方法 来实现属性的监听 -->
+  <div id="app">
+    <div>
+      <span>名：</span>
+      <span>
+        <input type="text" v-model="firstName">
+      </span>
+    </div>
+    <div>
+      <span>姓：</span>
+      <span>
+        <input type="text" v-model="lastName">
+      </span>
+    </div>
+    <div>{{fullName}}</div>
+  </div>
+  <!-- 我们的需求是 修改上面的名 和 下面的姓  fullName全名跟着变化 -->
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        firstName: 'Lebron',
+        lastName: 'James',
+        // 使用计算属性的时候 这个fullName就可以注释掉
+        fullName: 'Lebron James'
+      },
+      // 为了实现我们的需求 我们可以使用侦听器来操作
+      watch: {
+        // 侦听数据的变化 函数名要和我们data中定义的属性名保持一致 
+        // 我们给其定义一个形参 表示的是firstName当前最新的值 只要数据发生变化 val就会跟着变化 就会得到最新的值 
+        firstName(val){
+          // 这里我们进行拼接 因为val是当前firstName当前最新的值 所以我们把val放到前面 中间拼接空格 后面是lastName
+          this.fullName = val + ' ' + this.lastName
+        },
+        // 那么lastName同理
+        lastName(val){
+          this.fullName = this.firstName + ' ' + val
+        }
+        // 侦听器会一直监听data中的数据变化 只要一变化 便会触发侦听器 实现其内部的逻辑
+      },
+      // 其实上面的效果我们使用计算属性也可以实现 写完计算属性 把上面的fullName注释掉 watch里的也注释掉
+      // 我们发现当前这种情况我们使用计算属性也可以实现 而且会比我们使用侦听器要简单 但是 有一些场景计算属性是实现不了的 异步或者开销较大的操作的时候 接下来我们写一个案列来看一下
+      computed: {
+        fullName(){
+          return this.firstName + ' ' + this.lastName
+        }
+      },
+  })
+  </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 保存数据localStorage
+    localStorage.setItem('gender', '男')
+    localStorage.setItem('address', '江苏省')
+
+    // 我们访问一下sessionStorage中的数据 看看能不能获取到
+    // 在localStorage文件中获取sessionStorage文件中存的数据 跨选项卡获取数据
+    // 我们发现拿不到 因为sessionStorage中的数据仅限当前选项卡可以拿到
+    // 但是我们回到之前的sessionStorage的选项卡中 能够获取到localStorage的数据(控制器查看) localStorage是跨选项卡存在的 就算我们关闭浏览器 重新打开 localStorage的数据也会存在 因为localStorage的数据是存在本地的 回到sessionStorage中去获取一下localStorage的数据
+    console.log(sessionStorage.getItem('name'),'上一个选项卡中的数据');
+
+  </script>
+</body>
+</html>

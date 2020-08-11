@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="canvas" width="400px" height="400px"></canvas>
+
+  <script>
+    window.onload = function () {
+      // 获取canvas
+      var canvas = document.getElementById('canvas')
+      // 获取2d上下文
+      var context = canvas.getContext('2d')
+      // 打开路径
+      context.beginPath()
+      // 直线的起点
+      context.moveTo(0, 0)
+      // 直线的终点 先设置边框颜色 绘制到画布上
+      context.lineTo(100, 100)
+
+      // 绘制折线 要把闭合路径注释 不让它闭合 如果闭合 会出现三角形或多边形
+      // 绘制完折线 绘制转折点
+      context.lineTo(200, 100)
+      context.lineTo(300, 200)
+      context.lineTo(400, 400)
+
+      // 闭合路径
+      // context.closePath()
+
+      // 设置边框颜色
+      context.strokeStyle = 'coral'
+      // 设置边框宽度
+      context.lineWidth = 4
+      // 绘制路径到画布上
+      context.stroke()
+
+      // 绘制折线转折点 画圆 用圆来当做转折点
+      // 打开路径
+      context.beginPath()
+      // 绘制圆的路径 参数:圆心x坐标，圆心y坐标，半径，开始角度，结束角度，绘制方向(true为逆时针，false为顺时针)
+      context.arc(100,100,5,0,Math.PI*2)
+      // 闭合路径
+      context.closePath()
+      // 绘制
+      // 设置填充颜色
+      context.fillStyle = 'skyblue'
+      context.fill()
+
+      context.beginPath()
+      context.arc(200, 100, 5, 0, Math.PI * 2)
+      context.closePath()
+      context.fillStyle = 'skyblue'
+      context.fill()
+
+      context.beginPath()
+      context.arc(300, 200, 5, 0, Math.PI * 2)
+      context.closePath()
+      context.fillStyle = 'skyblue'
+      context.fill()
+    }
+  </script>
+</body>
+
+</html>

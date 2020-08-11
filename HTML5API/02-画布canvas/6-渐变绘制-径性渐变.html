@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="canvas" width="400px" height="400px"></canvas>
+
+  <script>
+    window.onload = function () {
+      // 获取canvas
+      var canvas = document.getElementById('canvas')
+      // 获取2d上下文
+      var context = canvas.getContext('2d')
+      // 创建径性渐变 参数：起始圆的圆心x坐标，y坐标，半径，结束圆的圆心x坐标，y坐标，半径
+      var g = context.createRadialGradient(200, 200, 100, 200, 200, 200)
+      //  添加渐变颜色 参数：0-1之间的偏移量，颜色值
+      g.addColorStop(0.2, 'red')
+      g.addColorStop(0.8, 'blue')
+
+      // 渐变对象的使用
+      // 绘制 设置填充渐变
+      context.fillStyle = g
+      // 使用渐变绘制矩形
+      context.fillRect(0, 0, 400, 400)
+    }
+  </script>
+</body>
+
+</html>

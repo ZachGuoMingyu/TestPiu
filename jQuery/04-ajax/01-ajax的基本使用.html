@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h2>数据加载</h2>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  <script>
+    // 调用ajax方式 放到火狐里测试
+    // jQuery.ajax(...)
+    // jQuery的ajax默认提交的都是表单格式数据
+    // 第一个参数 url接口地址 第二个参数 ajax配置对象
+    /*
+      $.ajax('https://api.apiopen.top/musicRankings', {
+        // ajax配置对象
+        // 请求方式
+        method: 'GET',
+        // 传递给后台的数据
+        // data: {},
+        // 请求成功回调函数
+        success: function (res) {
+          // res 后台响应的数据
+          console.log(res);
+        },
+        // 请求失败的回调函数
+        error: function (error) {
+          // error 错误信息
+          console.log(error);
+        }
+      })
+    */
+
+    // get无参 直接使用对象形式写
+    $.ajax({
+      url:'https://api.apiopen.top/musicRankings',
+      method:'GET',
+      success: function (res) {
+        console.log('GET无参', res);
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    })
+
+    // get有参 get方式的参数，将data中的数据转成查询字符串格式追加到url后。
+    $.ajax({
+      url: 'https://api.apiopen.top/musicRankingsDetails',
+      method: 'GET',
+      data:{type:1},
+      success: function (res) {
+        console.log('GET有参', res);
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    })
+
+    // post无参
+    $.ajax({
+      url: 'http://134.175.100.63:5588/user/logout',
+      method: 'POST',
+      success: function (res) {
+        console.log('POST无参', res);
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    })
+
+    // post有参 post方式的参数，将data中数据转成表单格式的数据，放到请求体中
+    $.ajax({
+      url: 'https://api.apiopen.top/musicRankingsDetails',
+      method: 'POST',
+      data:{type:1},
+      success: function (res) {
+        console.log('POST有参', res);
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    })
+
+  </script>
+</body>
+</html>

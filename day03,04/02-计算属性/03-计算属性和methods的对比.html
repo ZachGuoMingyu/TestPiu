@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <!-- 1.通过插值语法直接拼接： 语法过于繁琐-->
+    <h2>{{firstName}} {{lastName}}</h2>
+
+    <!-- 2.通过定义methods -->
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+    <h2>{{getFullName()}}</h2>
+
+    <!-- 3.通过computed -->
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+    <h2>{{fullName}}</h2>
+
+    <!-- 计算属性会进行缓存，如果多次使用时，计算属性只会调用一次 但是方法每调用一次 便会重新执行一次 -->
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    const app = new Vue({
+      el: '#app',
+      data: {
+        firstName: 'lebron',
+        lastName: 'james'
+      },
+      methods: {
+        getFullName(){
+          console.log('methods---getFullName')
+          return this.firstName + ' ' + this.lastName
+        }
+      },
+      computed: {
+        fullName(){
+          console.log('computed---fullName');
+          return this.firstName + ' ' + this.lastName
+        }
+      },
+  })
+  </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>自定义的媒体播放</title>
+</head>
+<body>
+
+  <div id="btn-div">
+    <button>播放</button>
+    <button>暂停</button>
+    <button id="toggle">切换播放/暂停</button>
+    <button>快进</button>
+    <button>快退</button>
+    <button>2倍速</button>
+    <button>0.5倍速</button>
+    <button>正常倍速</button>
+    <button>音量+</button>
+    <button>音量-</button>
+  </div>
+  <br>
+  <video width="1000px" src="../meida/Amazing design.mp4" controls></video>
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  <script>
+    // 获取视频节点
+    var video = $('video')[0]
+
+    // 获取切换按钮节点 讲完暂停再讲这
+    var toggleBtn = $('#toggle')
+    // 切换按钮绑定事件
+    toggleBtn.click(function () {
+      // video.paused 为true就是暂停状态 为false就是播放状态
+      console.log(video.paused);
+      // 根据paused状态判断 控制播放暂停
+      if (video.paused) {
+        video.play()
+        // 切换按钮文字为暂停 这里的文本要和下面设置的不同 不然下面的判断会拦截我们的操作
+        $(this).text('暂停视频')
+      }else{
+        video.pause()
+        // 切换按钮文字为播放
+        $(this).text('播放视频')
+      }
+    })
+
+    // 获取button绑定事件 使用事件代理
+    $('#btn-div').click(function (event) {
+      var text = $(event.target).text()
+      // 这里我们就使用if判断 不用switch了
+      if (text === '播放') {
+        // 播放 play()
+        video.play()
+      }
+      if (text === '暂停') {
+        // 暂停 pause()
+        video.pause()
+      }
+      if (text === '快进') {
+        // 快进 通过控制currentTime来实现快进
+        console.log(video.currentTime);
+        video.currentTime += 10
+      }
+      if (text === '快退') {
+        // 快退 通过控制currentTime来实现快退
+        console.log(video.currentTime);
+        video.currentTime -= 10
+      }
+      if (text === '2倍速') {
+        // 2倍速 playbackRate 当前播放速率
+        video.playbackRate = 2
+      }
+      if (text === '0.5倍速') {
+        // 0.5倍速 playbackRate 当前播放速率
+        video.playbackRate = 0.5
+      }
+      if (text === '正常倍速') {
+        // 正常倍速 playbackRate 当前播放速率
+        video.playbackRate = 1
+      }
+      if (text === '音量+') {
+        // 音量+ volume 0~1
+        if (video.volume >= 1) {
+          alert('音量已经最大')
+        }else{
+          video.volume += 0.1
+        }
+        
+      }
+      if (text === '音量-') {
+        // 音量- volume 0~1
+        if (video.volume < 0.1) {
+          alert('音量已经最小')
+        } else {
+          video.volume -= 0.1
+        }
+        console.log(video.volume);
+      }
+    })
+
+    // 使用方向键控制快进快退音量加减 我们使用原生来获取方向键 (其实我们发现，当我们不处理的时候，浏览器默认已经支持我们的方向键来控制快进快退 音量加减)
+    document.onkeydown = function (event) {
+      // 键盘码
+      console.log(event.keyCode);
+      // 左37 上38 右39 下40
+      if (event.keyCode === 37) {
+        // 快退
+        video.currentTime -= 10
+      }
+      if (event.keyCode === 39) {
+        // 快进
+        video.currentTime += 10
+      }
+      if (event.keyCode === 38) {
+        // 音量+
+        if (video.volume >= 1) {
+          alert('音量已经最大')
+        } else {
+          video.volume += 0.1
+        }
+      }
+      if (event.keyCode === 40) {
+        // 音量-
+        if (video.volume < 0.1) {
+          alert('音量已经最小')
+        } else {
+          video.volume -= 0.1
+        }
+      }
+    }
+  </script>
+</body>
+</html>

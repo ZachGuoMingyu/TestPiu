@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h2>我是app的实例</h2>
+    <cpn></cpn>
+  </div>
+
+  <div id="app2">
+    <h2>我是app2的实例</h2>
+    <cpn></cpn>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+    // 1.创建组件构造器
+    const cpn = Vue.extend({
+      template: `
+        <div>
+          <h2>我是组件的标题</h2>
+          <p>我是组件中的一个段落内容</p>  
+        </div>
+      `
+    })
+    // 2.注册全局组件（全局组件可以在多个Vue实例下使用）
+    // Vue.component('cpn', cpn)
+    const app = new Vue({
+      el: '#app',
+      data: {},
+      // 局部组件怎么创建呢？
+      components: {
+        // ES6中 如果key和value同名 我们可以直接写一个
+        // cpn
+        cpn: cpn
+      }
+    })
+
+    const app2 = new Vue({
+        el: '#app2',
+        data: {},
+    })
+  </script>
+</body>
+</html>

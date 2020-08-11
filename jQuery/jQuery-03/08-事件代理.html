@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>点我啊</button>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  <script>
+    $(function () {
+      // 点击body 用body来代理button的点击
+      // 第一个参数 事件类型 第二个参数(可选的，将要代理谁) 第三个参数(可选，传递给事件内部的参数) 第四个参数 事件处理程序
+      // $('body').on('click', function (event) {
+      //   console.log(event);
+      // }) 
+
+      // button做代理
+      $('body').on('click', 'button', { id: 1001 }, function (event, a, b) {
+        console.log(event, a, b);
+      })
+
+      // 事件解绑 移除代理 使用off
+      // $('body').off('click','button')
+
+      // 模拟事件执行 第一个参数 事件类型 第二个参数 数组参数(传递给形参，上面的a,b)
+      $('button').trigger('click', [1, 2])
+    })
+    
+
+  </script>
+</body>
+</html>

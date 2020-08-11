@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .green{
+      border: 1px solid green;
+    }
+    .red{
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="outer">
+    <div class="inner">div1</div>
+    <div class="inner">div2</div>
+    <div class="inner">div3</div>
+    <div class="inner">div4</div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  <script>
+    $(function () {
+      // 包裹节点
+      // 给所有的inner外部包裹一个绿色的div
+      // 使用wrap 在每个匹配的元素外层包上一个html元素。
+      // $('.inner').wrap($('<div class="green"></div>'))
+
+      // 给所有的inner内部包裹一个绿色的div
+      // 使用wrapInner 每个匹配元素里面内容(子元素)都会被这种结构包裹
+      // $('.inner').wrapInner($('<div class="red"></div>'))
+
+      // 将所有的inner包裹在一个绿色的div内部
+      // wrapAll 将所有匹配的元素用一个元素来包裹，在所有匹配元素外面包一层HTML结构
+      $('.inner').wrapAll($('<div class="green"></div>'))
+    })
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 给window的对象添加事件监听
+    window.addEventListener("storage", showStorage);
+    function showStorage(e) {
+      if (!e) {
+        e = window.event;
+      }
+      var str = "key: " + e.key +
+                "\nnewValue: " + e.newValue +
+                "\noldValue: " + e.oldValue +
+                "\nurl: " + e.url +
+                "\nstorageArea: " + e.storageArea;
+
+      alert(str);
+    }
+  </script>
+</body>
+</html>

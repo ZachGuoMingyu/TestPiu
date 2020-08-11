@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="outer">
+    <div>兄弟节点</div>
+    <div class="inner">子代inner</div>
+    <div>
+      <div class="inner">
+        后代inner
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.12.4/jquery.js"></script>
+  <script>
+    $(function () {
+      // children 用于取得匹配元素的子元素集合（只考虑子元素而不考虑任何后代元素）
+      // 获取所有子元素中的inner
+      // var $result = $('.outer').children('.inner')
+      // console.log($result);
+
+      // find 在当前元素对象中的子元素中查找，和参数所匹配的所有的后代元素	
+      // 获取所有后代元素中的inner
+      // var $result = $('.outer').find('.inner')
+      // console.log($result);
+
+      // prev 取得匹配元素前面紧邻的兄弟元素
+      // 获取子元素class="inner"的前面的兄弟元素
+      var $result = $('.outer>.inner.inner').prev()
+      console.log($result);
+
+      // 其他方法大家自己根据在线文档下去尝试
+    })
+    
+  </script>
+</body>
+</html>

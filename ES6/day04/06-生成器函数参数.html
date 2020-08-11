@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 声明一个生成器函数
+    function * gen(arg) {
+      console.log(arg);
+      // 使用yield语句返回几个结果
+      let one = yield 111
+      console.log(one); //one是第二次执行next()方法传递进来的实参
+
+      let two = yield 222
+      console.log(two); //two是第三次执行next()方法传递进来的实参
+
+      let three = yield 333
+      console.log(three); //three是第四次执行next()方法传递进来的实参
+    }
+
+    // 执行获取迭代器对象
+    let a = gen('AAA') //可以在这里传入参数 当我们把下面全都注释的时候 发现并没有输出 我们打开一个next 可以输出AAA 也就是执行了第一个片段
+    console.log(a.next());
+    // next 方法也可以传入实参 这个实参就是yield语句的返回结果 当第二个next()方法调用时传入的参数 当作第一个yield语句的整体返回结果 
+    console.log(a.next('BBB'));
+    console.log(a.next('CCC'));
+    console.log(a.next('DDD'));
+    // 也就是说 next传递的参数 都会作为上一个yield返回的结果 有了这个特性支持 异步编程参数传递就可以实现了
+  </script>
+</body>
+</html>
